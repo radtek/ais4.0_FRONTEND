@@ -8,8 +8,8 @@ function route($stateProvider) {
     $stateProvider.state('airoom', {
         parent: 'frame',
         url: '/airoom',
-        template: require('./airoom.html'),
-        less: require('./airoom.less'),
-        controller: require('./airoom.controller.js')
+        template: require('./aiRoom.html'),
+        less: require('./aiRoom.less'),
+        controller: require('./aiRoom.controller.js')
     })
 }
