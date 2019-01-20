@@ -11,7 +11,7 @@ function AsseVisitFormCtrl($rootScope, $scope, IHttp, $timeout, $state, toastr, 
     select.sysCodeBy('awareness').then((rs) => {
         vm.awarenessList = rs.data.resultList;
     })
-
+    console.log(100);
     function initData() {
         IHttp.post('document/searchPatPrevisitRecordByRegOptId', { 'regOptId': regOptId }).then(function(rs) {
             if (rs.data.resultCode != 1)
