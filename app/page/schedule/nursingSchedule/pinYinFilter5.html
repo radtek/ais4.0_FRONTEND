@@ -1,0 +1,2 @@
+<!-- 台次 -->
+<oi-select ng-class="{true: 'inversion'}[row.entity.subscript % 15 >= 10]" ng-change="grid.appScope.blurFn(row.entity,col,'isSameNurs');" ng-disabled=" row.entity.state == '04' || row.entity.state == '05' || row.entity.state == '06' || row.entity.state == '07' " ng-click="grid.appScope.focus(row.entity, col);" oi-options="item.codeValue as item.codeValue for item in col.colDef.editDropdownOptionsArray track by item.codeValue | limitTo: 100" ng-model="row.entity.pcs" oi-select-options="{listFilter: 'oiSelectAscSort:[\'pinYin\']', cleanModel: true}"></oi-select>

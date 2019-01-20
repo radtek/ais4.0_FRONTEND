@@ -1,0 +1,14 @@
+<div flex>
+    <div style="height: 40px;text-align: right;">
+        <span>月份 </span>
+        <input datetimepicker="" flex="10" dateID="date-start-time" ng-model="month" timepicker="false" format="Y-m" class="form-control" style="display: inline-block;width: 200px;" required></input>
+
+
+        <button class="btn btn-primary" style="height: 32px;margin: 0 15px;" type="button" ng-click="query()">查&nbsp;&nbsp;询</button>
+
+        
+        <button class="btn btn-primary pull-right" type="button" ng-click="export()">导出EXCEL</button>
+    </div>
+    <div ui-grid="gridOptions" ui-grid-exporter ui-grid-auto-resize ui-grid-pagination ng-if="gridOptions.data" class="ui-grid-729"></div>
+    <div class="noData" ng-if="!gridOptions.data">暂无数据</div>
+</div>

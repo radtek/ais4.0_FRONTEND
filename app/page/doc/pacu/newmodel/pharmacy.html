@@ -1,0 +1,550 @@
+<div class="modal-header">
+    <h4><span class="pull-right modal-container_close" ng-click="vm.cancel()">✖</span></h4>
+</div>
+<form name="form" class="form-horizontal pharmacy" novalidate>
+    <div class="modal-body" layout>
+        <div ng-style='vm.groupMenu'>
+            <div ng-style="vm.groupList">
+                <button type="button" class="btn btn-primary" ng-click="isCollapsed1 = !isCollapsed1" style="text-align: left; width: 100%; margin-bottom: 10px;">个人</button>
+                <div uib-collapse="isCollapsed1">
+                    <div ng-repeat="item in vm.tplPrivate" class="groupTplItem" ng-click="vm.useTpl(item)">{{item.medTempName}}
+                         <span title="删除" class="glyphicon glyphicon-trash" ng-click="vm.delTemp(item, $event);"></span>
+                    </div>
+                </div>
+            </div>
+            <div ng-style="vm.groupList">
+                <button type="button" class="btn btn-primary" ng-click="isCollapsed2 = !isCollapsed2" style="text-align: left; width: 100%;">公用</button>
+                <div uib-collapse="isCollapsed2">
+                    <div ng-repeat="item in vm.tplPublic" class="groupTplItem" ng-click="vm.useTpl(item)">{{item.medTempName}}
+                         <span title="删除" class="glyphicon glyphicon-trash" ng-click="vm.delTemp(item, $event);"></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div flex>
+            <uib-tabset active="vm.tabs.curIndex" type="tabs" style="margin-bottom: 15px;">
+                <uib-tab index="$index" ng-repeat="tab in vm.tabs.list" heading="{{tab.title}}" disable="tab.disabled||vm.isApply" select="vm.selectCurTab($index)"></uib-tab>
+            </uib-tabset>
+            <div flex=40 layout layout-align="start center" style="margin: 15px 0;" ng-if="vm.tabs.curIndex > 0">
+                <oi-select flex name="searchEvent" oi-options="item.name for item in vm.searchTypeData($query) | limitTo: 100" oi-select-options="{listFilter: 'oiSelectAscSort:[\'pinyin\']', dropdownFilter: 'dropdownAddRow'}" ng-model="vm.evItem" ng-if="vm.tabs.curIndex == 1 || vm.tabs.curIndex == 2 || vm.tabs.curIndex == 3" placeholder="输入关键字搜索"></oi-select>
+                <oi-select flex name="searchEvent" oi-options="item.name for item in vm.searchTypeData($query) | limitTo: 100" oi-select-options="{listFilter: 'oiSelectAscSort:[\'pinyin\']', cleanModel: true}" ng-model="vm.evItem" ng-if="vm.tabs.curIndex != 1 && vm.tabs.curIndex != 2 && vm.tabs.curIndex != 3" placeholder="输入关键字搜索"></oi-select>
+            </div>
+            <div class="comItem">
+                <button class="btn btn-info" style="margin-right: 10px; margin-bottom: 10px;" ng-repeat="item in vm.searchCommData" type="button" ng-click="vm.add(item)">{{item.name}}&nbsp;&nbsp;{{item.spec}}</button>
+            </div>
+            <div>
+                <button type="button" class="btn btn-primary" ng-click="anaesMedTable()" ng-if="vm.tabs.type == ''&&getTitleByType('2')" style="text-align: left; width: 100%; margin-bottom: 10px;">{{getTitleByType('2')}}</button>
+                <table class="table table-hover table-bordered table-condensed" ng-if="(vm.tabs.type == '' && vm.anaesMedTable % 2 == 0&&getTitleByType('2')) || (vm.tabs.type == '2'&&getTitleByType('2'))">
+                    <tr>
+                        <th style="width: 200px;">名称</th>
+                        <th style="min-width: 40px;">规格</th>
+                        <th style="width: 60px;">剂量</th>
+                        <th style="width: 60px;">单位</th>
+                        <th>途径</th>
+                        <th style="width: 60px;">浓度</th>
+                        <th style="width: 50px;">单位</th>
+                        <th style="width: 60px;">流速</th>
+                        <th style="width: 80px;">单位</th>
+                        <th style="width: 70px;">是否持续</th>
+                        <th style="width: 135px;">开始时间</th>
+                        <th style="width: 135px;">结束时间</th>
+                        <th style="width: 40px;">操作</th>
+                    </tr>
+                    <tr ng-repeat="row in vm.dataList | filter : {'type':'2'} track by $index">
+                        <td>{{row.name}}</td>
+                        <td>{{row.spec}}</td>
+                        <td>
+                            <div ng-mouseover="_dosage = true" ng-mouseleave="_dosage = false">
+                                <input flex ng-model="row.dosage" type="number" transform="number" min="0" name="dosage" ng-if="_dosage">
+                                <span class="hide-span" ng-if="!_dosage">{{row.dosage}}</span>
+                            </div>
+                        </td>
+                        <td>
+                            <span>{{row.dosageUnit}}</span>
+                        </td>
+                        <td ng-mouseover="_way = true" ng-mouseleave="_way = false">
+                            <select ng-model="row.way" id="iWay" ng-options="item.medTakeWayId as item.name for item in vm.wayList" ng-change="vm.changeWay(row)" ng-if="_way"></select>
+                            <span class="hide-span" style="width:135px;text-align: left;" ng-if="!_way">{{row.takeWayName}}</span>
+                        </td>
+                        <td>
+                            <div ng-mouseover="_thickness = true" ng-mouseleave="_thickness = false">
+                                <input flex ng-model="row.thickness" type="number" transform="number" min="0" name="thickness" ng-if="_thickness">
+                                <span class="hide-span" ng-if="!_thickness">{{row.thickness}}</span>
+                            </div>
+                        </td>
+                        <td ng-mouseover="_thicknessUnit = true" ng-mouseleave="_thicknessUnit = false">
+                            <select flex ng-model="row.thicknessUnit" ng-if="_thicknessUnit">
+                                <option value=""></option>
+                                <option value="摩尔">摩尔</option>
+                                <option value="%">%</option>
+                                <option value="mg/ml">mg/ml</option>
+                                <option value="ng/ml">ng/ml</option>
+                                <option value="μg/ml">μg/ml</option>
+                            </select>
+                            <span class="hide-span" style="text-align: left;" ng-if="!_thicknessUnit">{{row.thicknessUnit}}</span>
+                        </td>
+                        <td>
+                            <div ng-mouseover="_flow = true" ng-mouseleave="_flow = false">
+                                <input flex ng-model="row.flow" type="number" transform="number" min="0" name="flow" ng-if="_flow">
+                                <span class="hide-span" ng-if="!_flow">{{row.flow}}</span>
+                            </div>
+                        </td>
+                        <td ng-mouseover="_flowUnit = true" ng-mouseleave="_flowUnit = false">
+                            <select flex ng-model="row.flowUnit" name="flowUnit" ng-if="_flowUnit">
+                                <option value=""></option>
+                                <option value="l/min">l/min</option>
+                                <option value="滴/min">滴/min</option>
+                                <option value="ml/h">ml/h</option>
+                                <option value="μg/kg/min">μg/kg/min</option>
+                                <option value="mg/kg/min">mg/kg/min</option>
+                                <option value="μg/kg/h">μg/kg/h</option>
+                                <option value="mg/kg/h">mg/kg/h</option>
+                            </select>
+                            <span class="hide-span" style="text-align: left;width: 70px;" ng-if="!_flowUnit">{{row.flowUnit}}</span>
+                        </td>
+                        <td class="text-center" ng-mouseover="_durable = true" ng-mouseleave="_durable = false">
+                            <select style="width: 40px; padding-left: 7px;" ng-model="row.durable" ng-if="_durable">
+                                <option ng-value="0">否</option>
+                                <option ng-value="1">是</option>
+                            </select>
+                            <span class="hide-span" style="width:40px;margin-left:5px;" ng-if="!_durable">{{row.durable == 1 ? '是' : '否'}}</span>
+                        </td>
+                        <td ng-mouseover="vm.startTime(1)">
+                            <div ng-if="!startTime1">
+                                <input style="width:100%" flex ng-model="row.startTime_" name="startTime"></input>
+                            </div>
+                            <div ng-if="startTime1">
+                                <input style="width:100%" datetimepicker="" flex ng-model="row.startTime" name="startTime"></input>
+                            </div>
+                        </td>
+                        <td ng-mouseover="vm.endTime(1)">
+                            <div ng-if="!endTime1">
+                                <input style="width:100%" flex ng-model="row.endTime_" name="endTime"></input>
+                            </div>
+                            <div ng-if="endTime1">
+                                <input style="width:100%" datetimepicker="" flex ng-model="row.endTime" name="endTime"></input>
+                            </div>
+                        </td>
+                        <td class="text-center">
+                            <span title="删除" class="glyphicon glyphicon-trash" ng-click="vm.del($index, row);"></span>
+                        </td>
+                    </tr>
+                    <tr ng-if="(vm.dataList | filter : {'type':'2'}).length == 0 && (vm.tempArry | filter : {'type':'2'}).length == 0">
+                        <td class="no-data" colspan="13">暂无数据</td>
+                    </tr>
+                    <tr ng-repeat="row in vm.tempArry | filter : {'type':'2'} track by $index">
+                        <td style="color: #ea5555">{{row.name}}</td>
+                        <td style="color: #ea5555">{{row.spec}}</td>
+                        <td>
+                            <input flex ng-model="row.dosage" type="number" transform="number" min="0" name="dosage">
+                        </td>
+                        <td>
+                            <span>{{row.dosageUnit}}</span>
+                        </td>
+                        <td>
+                            <select ng-model="row.way" ng-options="item.medTakeWayId as item.name for item in vm.wayList"></select>
+                        </td>
+                        <td>
+                            <input flex ng-model="row.thickness" type="number" transform="number" min="0" name="thickness">
+                        </td>
+                        <td>
+                            <select flex ng-model="row.thicknessUnit">
+                                <option value=""></option>
+                                <option value="摩尔">摩尔</option>
+                                <option value="%">%</option>
+                                <option value="mg/ml">mg/ml</option>
+                                <option value="ng/ml">ng/ml</option>
+                                <option value="μg/ml">μg/ml</option>
+                            </select>
+                        </td>
+                        <td>
+                            <input flex ng-model="row.flow" type="number" transform="number" min="0" name="flow">
+                        </td>
+                        <td>
+                            <select flex ng-model="row.flowUnit" name="flowUnit">
+                                <option value=""></option>
+                                <option value="l/min">l/min</option>
+                                <option value="滴/min">滴/min</option>
+                                <option value="ml/h">ml/h</option>
+                                <option value="μg/kg/min">μg/kg/min</option>
+                                <option value="mg/kg/min">mg/kg/min</option>
+                                <option value="μg/kg/h">μg/kg/h</option>
+                                <option value="mg/kg/h">mg/kg/h</option>
+                            </select>
+                        </td>
+                        <td class="text-center">
+                            <select style="width: 30px; padding-left: 7px;" ng-model="row.durable">
+                                <option ng-value="0">否</option>
+                                <option ng-value="1">是</option>
+                            </select>
+                        </td>
+                        <td ng-mouseover="vm.startTime(1)">
+                            <div ng-if="!startTime1">
+                                <input style="width:100%" flex ng-model="row.startTime_" name="startTime"></input>
+                            </div>
+                            <div ng-if="startTime1">
+                                <input style="width:100%" datetimepicker="" flex ng-model="row.startTime" name="startTime"></input>
+                            </div>
+                        </td>
+                        <td ng-mouseover="vm.endTime(1)">
+                            <div ng-if="!endTime1">
+                                <input style="width:100%" flex ng-model="row.endTime_" name="endTime"></input>
+                            </div>
+                            <div ng-if="endTime1">
+                                <input style="width:100%" datetimepicker="" flex ng-model="row.endTime" name="endTime"></input>
+                            </div>
+                        </td>
+                        <td class="text-center">
+                            <span title="删除" class="glyphicon glyphicon-trash" ng-click="vm.del($index, row);"></span>
+                        </td>
+                    </tr>
+                </table> 
+                <button type="button" class="btn btn-primary" ng-click="treatMedTable()" ng-if="vm.tabs.type == ''" style="text-align: left; width: 100%; margin-bottom: 10px;">{{getTitleByType('1')}}</button>
+                <table class="table table-hover table-bordered table-condensed" ng-if="(vm.tabs.type == '' && vm.treatMedTable % 2 == 0) || vm.tabs.type == '1'">
+                    <tr>
+                        <th style="width: 200px;">名称</th>
+                        <th style="min-width: 40px;">规格</th>
+                        <th style="width: 60px;">剂量</th>
+                        <th style="width: 60px;">单位</th>
+                        <th>途径</th>
+                        <th style="width: 60px;">浓度</th>
+                        <th style="width: 50px;">单位</th>
+                        <th style="width: 60px;">流速</th>
+                        <th style="width: 80px;">单位</th>
+                        <th style="width: 70px;">是否持续</th>
+                        <th style="width: 135px;">开始时间</th>
+                        <th style="width: 135px;">结束时间</th>
+                        <th style="width: 40px;">操作</th>
+                    </tr>
+                    <tr ng-repeat="row in vm.dataList | filter : {'type':'1'} track by $index">
+                        <td>{{row.name}}</td>
+                        <td>{{row.spec}}</td>
+                        <td>
+                            <div ng-mouseover="_dosage = true" ng-mouseleave="_dosage = false">
+                                <input flex ng-model="row.dosage" type="number" transform="number" min="0" name="dosage" ng-if="_dosage">
+                                <span class="hide-span" ng-if="!_dosage">{{row.dosage}}</span>
+                            </div>
+                        </td>
+                        <td>
+                            <span>{{row.dosageUnit}}</span>
+                        </td>
+                        <td ng-mouseover="_way = true" ng-mouseleave="_way = false">
+                            <select ng-model="row.way" id="iWay" ng-options="item.medTakeWayId as item.name for item in vm.wayList" ng-change="vm.changeWay(row)" ng-if="_way"></select>
+                            <span class="hide-span" style="width:135px;text-align: left;" ng-if="!_way">{{row.takeWayName}}</span>
+                        </td>
+                        <td>
+                            <div ng-mouseover="_thickness = true" ng-mouseleave="_thickness = false">
+                                <input flex ng-model="row.thickness" type="number" transform="number" min="0" name="thickness" ng-if="_thickness">
+                                <span class="hide-span" ng-if="!_thickness">{{row.thickness}}</span>
+                            </div>
+                        </td>
+                        <td ng-mouseover="_thicknessUnit = true" ng-mouseleave="_thicknessUnit = false">
+                            <select flex ng-model="row.thicknessUnit" ng-if="_thicknessUnit">
+                                <option value=""></option>
+                                <option value="摩尔">摩尔</option>
+                                <option value="%">%</option>
+                                <option value="mg/ml">mg/ml</option>
+                                <option value="ng/ml">ng/ml</option>
+                                <option value="μg/ml">μg/ml</option>
+                            </select>
+                            <span class="hide-span" style="text-align: left;" ng-if="!_thicknessUnit">{{row.thicknessUnit}}</span>
+                        </td>
+                        <td>
+                            <div ng-mouseover="_flow = true" ng-mouseleave="_flow = false">
+                                <input flex ng-model="row.flow" type="number" transform="number" min="0" name="flow" ng-if="_flow">
+                                <span class="hide-span" ng-if="!_flow">{{row.flow}}</span>
+                            </div>
+                        </td>
+                        <td ng-mouseover="_flowUnit = true" ng-mouseleave="_flowUnit = false">
+                            <select flex ng-model="row.flowUnit" name="flowUnit" ng-if="_flowUnit">
+                                <option value=""></option>
+                                <option value="l/min">l/min</option>
+                                <option value="滴/min">滴/min</option>
+                                <option value="ml/h">ml/h</option>
+                                <option value="μg/kg/min">μg/kg/min</option>
+                                <option value="mg/kg/min">mg/kg/min</option>
+                                <option value="μg/kg/h">μg/kg/h</option>
+                                <option value="mg/kg/h">mg/kg/h</option>
+                            </select>
+                            <span class="hide-span" style="text-align: left;width: 70px;" ng-if="!_flowUnit">{{row.flowUnit}}</span>
+                        </td>
+                        <td class="text-center" ng-mouseover="_durable = true" ng-mouseleave="_durable = false">
+                            <select style="width: 40px; padding-left: 7px;" ng-model="row.durable" ng-if="_durable">
+                                <option ng-value="0">否</option>
+                                <option ng-value="1">是</option>
+                            </select>
+                            <span class="hide-span" style="width:40px;margin-left:5px;" ng-if="!_durable">{{row.durable == 1 ? '是' : '否'}}</span>
+                        </td>
+                        <td ng-mouseover="vm.startTime(1)">
+                            <div ng-if="!startTime1">
+                                <input style="width:100%" flex ng-model="row.startTime_" name="startTime"></input>
+                            </div>
+                            <div ng-if="startTime1">
+                                <input style="width:100%" datetimepicker="" flex ng-model="row.startTime" name="startTime"></input>
+                            </div>
+                        </td>
+                        <td ng-mouseover="vm.endTime(1)">
+                            <div ng-if="!endTime1">
+                                <input style="width:100%" flex ng-model="row.endTime_" name="endTime"></input>
+                            </div>
+                            <div ng-if="endTime1">
+                                <input style="width:100%" datetimepicker="" flex ng-model="row.endTime" name="endTime"></input>
+                            </div>
+                        </td>
+                        <td class="text-center">
+                            <span title="删除" class="glyphicon glyphicon-trash" ng-click="vm.del($index, row);"></span>
+                        </td>
+                    </tr>
+                    <tr ng-if="(vm.dataList | filter : {'type':'1'}).length == 0 && (vm.tempArry | filter : {'type':'1'}).length == 0">
+                        <td class="no-data" colspan="13">暂无数据</td>
+                    </tr>
+                    <tr ng-repeat="row in vm.tempArry | filter : {'type':'1'} track by $index">
+                        <td style="color: #ea5555">{{row.name}}</td>
+                        <td style="color: #ea5555">{{row.spec}}</td>
+                        <td>
+                            <input flex ng-model="row.dosage" type="number" transform="number" min="0" name="dosage">
+                        </td>
+                        <td>
+                            <span>{{row.dosageUnit}}</span>
+                        </td>
+                        <td>
+                            <select ng-model="row.way" ng-options="item.medTakeWayId as item.name for item in vm.wayList"></select>
+                        </td>
+                        <td>
+                            <input flex ng-model="row.thickness" type="number" transform="number" min="0" name="thickness">
+                        </td>
+                        <td>
+                            <select flex ng-model="row.thicknessUnit">
+                                <option value=""></option>
+                                <option value="摩尔">摩尔</option>
+                                <option value="%">%</option>
+                                <option value="mg/ml">mg/ml</option>
+                                <option value="ng/ml">ng/ml</option>
+                                <option value="μg/ml">μg/ml</option>
+                            </select>
+                        </td>
+                        <td>
+                            <input flex ng-model="row.flow" type="number" transform="number" min="0" name="flow">
+                        </td>
+                        <td>
+                            <select flex ng-model="row.flowUnit" name="flowUnit">
+                                <option value=""></option>
+                                <option value="l/min">l/min</option>
+                                <option value="滴/min">滴/min</option>
+                                <option value="ml/h">ml/h</option>
+                                <option value="μg/kg/min">μg/kg/min</option>
+                                <option value="mg/kg/min">mg/kg/min</option>
+                                <option value="μg/kg/h">μg/kg/h</option>
+                                <option value="mg/kg/h">mg/kg/h</option>
+                            </select>
+                        </td>
+                        <td class="text-center">
+                            <select style="width: 30px; padding-left: 7px;" ng-model="row.durable">
+                                <option ng-value="0">否</option>
+                                <option ng-value="1">是</option>
+                            </select>
+                        </td>
+                        <td ng-mouseover="vm.startTime(1)">
+                            <div ng-if="!startTime1">
+                                <input style="width:100%" flex ng-model="row.startTime_" name="startTime"></input>
+                            </div>
+                            <div ng-if="startTime1">
+                                <input style="width:100%" datetimepicker="" flex ng-model="row.startTime" name="startTime"></input>
+                            </div>
+                        </td>
+                        <td ng-mouseover="vm.endTime(1)">
+                            <div ng-if="!endTime1">
+                                <input style="width:100%" flex ng-model="row.endTime_" name="endTime"></input>
+                            </div>
+                            <div ng-if="endTime1">
+                                <input style="width:100%" datetimepicker="" flex ng-model="row.endTime" name="endTime"></input>
+                            </div>
+                        </td>
+                        <td class="text-center">
+                            <span title="删除" class="glyphicon glyphicon-trash" ng-click="vm.del($index, row);"></span>
+                        </td>
+                    </tr>
+                </table>
+                <button type="button" class="btn btn-primary" ng-click="ioTable()" ng-if="vm.tabs.type == ''" style="text-align: left; width: 100%; margin-bottom: 10px;">{{getTitleByType('I')}}</button>
+                <table class="table table-hover table-bordered table-condensed" ng-if="(vm.tabs.type == '' && vm.ioTable % 2 == 0) || vm.tabs.type == 'I'">
+                    <tr>
+                        <th>液体名称</th>
+                        <th>容量</th>
+                        <th>血型</th>
+                        <th>规格</th>
+                        <th style="width: 130px;">开始时间</th>
+                        <th style="width: 40px;">操作</th>
+                    </tr>
+                    <tr ng-repeat="row in vm.dataList | filter : {'type':'I'} track by $index">
+                        <td>{{row.name}}</td>
+                        <td>
+                            <div ng-mouseover="_dosage = true" ng-mouseleave="_dosage = false">
+                                <input flex ng-model="row.dosage" type="number" transform="number" min="0" name="dosage" ng-if="_dosage">
+                                <span class="hide-span" ng-if="!_dosage">{{row.dosage}}</span>
+                            </div>
+                        </td>
+                        <td ng-mouseover="_blood = true" ng-mouseleave="_blood = false">
+                            <select flex ng-model="row.blood" ng-if="row.subType == '2' && _blood">
+                                <option ng-repeat="item in bloodList track by $index" value="{{item.codeName}}">{{item.codeName}}</option>
+                            </select>
+                            <span ng-if="row.subType == '1'">/</span>
+                            <span class="hide-span" style="text-align: left;width: 29px;" ng-if="row.subType == '2' && !_blood">{{row.blood}}</span>
+                        </td>
+                        <td>{{row.spec}}</td>
+                        <td ng-mouseover="vm.startTime(3)">
+                            <div ng-if="!startTime3">
+                                <input style="width:100%" flex ng-model="row.startTime_" name="startTime"></input>
+                            </div>
+                            <div ng-if="startTime3">
+                                <input style="width:100%" datetimepicker="" flex ng-model="row.startTime" name="startTime"></input>
+                            </div>
+                        </td>
+                        <td class="text-center">
+                            <span title="删除" class="glyphicon glyphicon-trash" ng-click="vm.del($index, row);"></span>
+                        </td>
+                    </tr>
+                    <tr ng-if="(vm.dataList | filter : {'type':'I'}).length == 0 && (vm.tempArry | filter : {'type':'I'}).length == 0">
+                        <td class="no-data" colspan="6">暂无数据</td>
+                    </tr>
+                    <tr ng-repeat="row in vm.tempArry | filter : {'type':'I'} track by $index">
+                        <td style="color: #ea5555">{{row.name}}</td>
+                        <td>
+                            <input flex ng-model="row.dosage" type="number" transform="number" min="0" name="dosage">
+                        </td>
+                        <td>
+                            <select flex ng-model="row.blood" ng-if="row.subType == '2'">
+                                <option ng-repeat="item in bloodList" value="{{item.codeName}}">{{item.codeName}}</option>
+                            </select>
+                            <span ng-if="row.subType == '1'">/</span>
+                        </td>
+                        <td>{{row.spec}}</td>
+                        <td ng-mouseover="vm.startTime(3)">
+                            <div ng-if="!startTime3">
+                                <input style="width:100%" flex ng-model="row.startTime_" name="startTime"></input>
+                            </div>
+                            <div ng-if="startTime3">
+                                <input style="width:100%" datetimepicker="" flex ng-model="row.startTime" name="startTime"></input>
+                            </div>
+                        </td>
+                        <td class="text-center">
+                            <span title="删除" class="glyphicon glyphicon-trash" ng-click="vm.del($index, row);"></span>
+                        </td>
+                    </tr>
+                </table>
+                <button type="button" class="btn btn-primary" ng-click="outTable()" ng-if="vm.tabs.type == ''" style="text-align: left; width: 100%; margin-bottom: 10px;">{{getTitleByType('O')}}</button>
+                <table class="table table-hover table-bordered table-condensed outamount" ng-if="(vm.tabs.type == '' && vm.outTable % 2 == 0) || vm.tabs.type == 'O'">
+                    <tr>
+                        <th>出量名称</th>
+                        <th>数值</th>
+                        <th style="width: 90px;">巡回护士</th>
+                        <th style="width: 130px;">开始时间</th>
+                        <th style="width: 40px;">操作</th>
+                    </tr>
+                    <tr ng-repeat="row in vm.dataList | filter : {'type':'O'} track by $index">
+                        <td>{{row.name}}</td>
+                        <td>
+                            <div ng-mouseover="_dosage = true" ng-mouseleave="_dosage = false">
+                                <input flex ng-model="row.dosage" type="number" transform="number" min="0" name="dosage" ng-if="_dosage">
+                                <span class="hide-span" ng-if="!_dosage">{{row.dosage}}</span>
+                            </div>
+                        </td>
+                        <td ng-mouseover="_createUser = true" ng-mouseleave="_createUser = false">
+                            <select flex id="iUser" ng-model="row.createUser" ng-change="vm.changeUser(row)" ng-if="_createUser">
+                                <option ng-repeat="item in xhhsList track by $index" value="{{item.userLoginName}}">{{item.name}}</option>
+                            </select>
+                            <span class="hide-span" style="text-align: left;" ng-if="!_createUser">{{row.createUserName}}</span>
+                        </td>
+                        <td ng-mouseover="vm.startTime(4)">
+                            <div ng-if="!startTime4">
+                                <input style="width:100%" flex ng-model="row.startTime_" name="startTime"></input>
+                            </div>
+                            <div ng-if="startTime4">
+                                <input style="width:100%" datetimepicker="" flex ng-model="row.startTime" name="startTime"></input>
+                            </div>
+                        </td>
+                        <td class="text-center">
+                            <span title="删除" class="glyphicon glyphicon-trash" ng-click="vm.del($index, row);"></span>
+                        </td>
+                    </tr>
+                    <tr ng-if="(vm.dataList | filter : {'type':'O'}).length == 0 && (vm.tempArry | filter : {'type':'O'}).length == 0">
+                        <td class="no-data" colspan="5">暂无数据</td>
+                    </tr>
+                    <tr ng-repeat="row in vm.tempArry | filter : {'type':'O'} track by $index">
+                        <td style="color: #ea5555">{{row.name}}</td>
+                        <td>
+                            <input flex ng-model="row.dosage" type="number" transform="number" min="0" name="dosage">
+                        </td>
+                        <td>
+                            <select flex ng-model="row.createUser">
+                                <option ng-repeat="item in xhhsList" value="{{item.userLoginName}}">{{item.name}}</option>
+                            </select>
+                        </td>
+                        <td ng-mouseover="vm.startTime(4)">
+                            <div ng-if="!startTime4">
+                                <input style="width:100%" flex ng-model="row.startTime_" name="startTime"></input>
+                            </div>
+                            <div ng-if="startTime4">
+                                <input style="width:100%" datetimepicker="" flex ng-model="row.startTime" name="startTime"></input>
+                            </div>
+                        </td>
+                        <td class="text-center">
+                            <span title="删除" class="glyphicon glyphicon-trash" ng-click="vm.del($index, row);"></span>
+                        </td>
+                    </tr>
+                </table>
+ <!--                <button type="button" class="btn btn-primary" ng-click="anaesIncidentTable()" ng-if="vm.tabs.type == ''" style="text-align: left; width: 100%; margin-bottom: 10px;">麻醉事件</button>
+                <table class="table table-hover table-bordered table-condensed anaesEvt" ng-if="(vm.tabs.type == '' && vm.anaesIncidentTable % 2 == 0) || vm.tabs.type == '4'">
+                    <tr>
+                        <th>事件名称</th>
+                        <th style="width: 130px;">时间</th>
+                        <th style="width: 40px;">操作</th>
+                    </tr>
+                    <tr ng-repeat="row in vm.dataList | filter : {'type':'4'} track by $index">
+                        <td>{{row.name}}</td>
+                        <td ng-mouseover="vm.startTime(5)">
+                            <div ng-if="!startTime5">
+                                <input style="width:100%" flex ng-model="row.startTime_" name="startTime"></input>
+                            </div>
+                            <div ng-if="startTime5">
+                                <input style="width:100%" datetimepicker="" flex ng-model="row.startTime" name="startTime"></input>
+                            </div>
+                        </td>
+                        <td class="text-center">
+                            <span title="删除" class="glyphicon glyphicon-trash" ng-click="vm.del($index, row);"></span>
+                        </td>
+                    </tr>
+                    <tr ng-if="(vm.dataList | filter : {'type':'4'}).length == 0 && (vm.tempArry | filter : {'type':'4'}).length == 0">
+                        <td class="no-data" colspan="3">暂无数据</td>
+                    </tr>
+                    <tr ng-repeat="row in vm.tempArry | filter : {'type':'4'} track by $index">
+                        <td style="color: #ea5555">{{row.name}}</td>
+                        <td ng-mouseover="vm.startTime(5)">
+                            <div ng-if="!startTime5">
+                                <input style="width:100%" flex ng-model="row.startTime_" name="startTime"></input>
+                            </div>
+                            <div ng-if="startTime5">
+                                <input style="width:100%" datetimepicker="" flex ng-model="row.startTime" name="startTime"></input>
+                            </div>
+                        </td>
+                        <td class="text-center">
+                            <span title="删除" class="glyphicon glyphicon-trash" ng-click="vm.del($index, row);"></span>
+                        </td>
+                    </tr>
+                </table> -->
+            </div>
+            <div ng-if="false">                
+                <strong>提示：</strong>
+                <checkbox ng-model="vm.isFilterDupl" ng-true-value="1">过滤模板与重复的数据</checkbox>
+            </div>
+        </div>
+    </div>
+    <div class="modal-footer" layout>
+        <button class="btn btn-default" ng-disabled="vm.dataList.length <= 0 && vm.tempArry.length <= 0" type="button" ng-click="vm.saveTpl()" ng-if="!vm.isApply && vm.tabs.type == ''">保存为模板</button>
+        <button class="btn btn-default" type="button" ng-click="vm.applyTpl(true)" ng-if="!vm.isApply">套用模板</button>
+        <!-- <button class="btn btn-default" type="button" ng-click="vm.unfold()" ng-if="!vm.isApply && vm.tabs.type == ''">{{fold}}</button> -->
+        <button class="btn btn-default" type="button" ng-click="vm.applyTpl(false)"  ng-if="vm.isApply">返回</button>
+        <div flex></div>
+        <button class="btn btn-primary" ng-disabled="vm.dataList.length <= 0 && vm.tempArry.length <= 0" type="button" ng-click="vm.save()">保&nbsp;&nbsp;存</button>
+        <button class="btn btn-default" type="button" ng-click="vm.cancel()">取&nbsp;&nbsp;消</button>
+    </div>
+</form>

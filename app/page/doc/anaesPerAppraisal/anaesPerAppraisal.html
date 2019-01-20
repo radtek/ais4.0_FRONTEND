@@ -1,0 +1,230 @@
+<div id="print-region">
+    <div class="page-print" id="anaesPerAppraisal" ng-class="{true: 'end-state'}[vm.record.processState == 'END' && !vm.saveActive || vm.setting.readonly]">
+        <header layout="column" layout-align="center center">
+            <h3 ng-if="vm.docInfo.beName">{{vm.docInfo.beName}}麻醉科绩效考核评分细节（1）</h3>
+        </header>
+        <div class="form-group line" layout layout-wrap="wrap" layout-align="space-between end" style="margin-bottom: 0px!important;"></div>
+        <div class="form-group" layout layout-wrap="wrap" layout-align="space-between end" style="margin-bottom: 0px!important;">
+            <span layout flex=20>住院号：{{vm.regOptItem.hid}}</span>
+            <span layout flex=20>姓名：{{vm.regOptItem.name}}</span>
+        </div>
+        <div class="form-group line" layout layout-wrap="wrap" layout-align="space-between end"></div>
+        <table class="form-group" border="0">
+            <tr>
+                <td width="315px;">名目</td>
+                <td width="50px;" align="center">参考分值</td>
+                <td align="center" width="60px;">评分</td>
+                <td width="315px;">名目</td>
+                <td width="50px;" align="center">参考分值</td>
+                <td align="center" width="60px;">评分</td>
+            </tr>
+            <tr>
+                <td>全身麻醉</td>
+                <td align="center">3</td>
+                <td><input type="number" flex class="noborder2" ng-model="ageSco" ng-value="ageSco"></td>
+                <td>请麻醉科会诊一般病例</td>
+                <td align="center">0.5</td>
+                <td><input type="number" flex class="noborder2" ng-model="ageSco" ng-value="ageSco"></td>
+            </tr>
+            <tr>
+                <td>介入手术(全麻)</td>
+                <td align="center">1</td>
+                <td></td>
+                <td>全院大会诊病例或写手术麻醉申请报医务科病例</td>
+                <td align="center">1</td>
+                <td><input type="number" flex class="noborder2" ng-model="ageSco" ng-value="ageSco"></td>
+            </tr>
+            <tr>
+                <td>椎管内麻醉</td>
+                <td align="center">2</td>
+                <td><input type="number" flex class="noborder2" ng-model="ageSco" ng-value="ageSco"></td>
+                <td>外院专家：_______手术病例</td>
+                <td align="center">1</td>
+                <td><input type="number" flex class="noborder2" ng-model="ageSco" ng-value="ageSco"></td>
+            </tr>
+            <tr>
+                <td>臂神经丛或和颈神经丛阻滞麻醉</td>
+                <td align="center">1</td>
+                <td><input type="number" flex class="noborder2" ng-model="ageSco" ng-value="ageSco"></td>
+                <td>计“大抢救”费</td>
+                <td align="center">1</td>
+                <td><input type="number" flex class="noborder2" ng-model="ageSco" ng-value="ageSco"></td>
+            </tr>
+            <tr>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td>协助抢救医师：_______</td>
+                <td align="center">1</td>
+                <td><input type="number" flex class="noborder2" ng-model="ageSco" ng-value="ageSco"></td>
+            </tr>
+            <tr>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td>输血8u红细胞以上或自体血回输800ml以上</td>
+                <td align="center">1</td>
+                <td><input type="number" flex class="noborder2" ng-model="ageSco" ng-value="ageSco"></td>
+            </tr>
+            <tr>
+                <td>≤12个月、≥90岁以上</td>
+                <td align="center">3</td>
+                <td><input type="number" flex class="noborder2" ng-model="ageSco" ng-value="ageSco"></td>
+                <td>气道评分：张口2横指以下、颈椎损伤、颈项强直、CT显示气管被压迫超2/3、喉水肿</td>
+                <td align="center">1</td>
+                <td><input type="number" flex class="noborder2" ng-model="ageSco" ng-value="ageSco"></td>
+            </tr>
+            <tr>
+                <td>12个月~3岁、≥80岁以上</td>
+                <td align="center">2</td>
+                <td><input type="number" flex class="noborder2" ng-model="ageSco" ng-value="ageSco"></td>
+                <td>1个重要脏器(心肺肝脑肾)以上功能衰竭</td>
+                <td align="center">1</td>
+                <td><input type="number" flex class="noborder2" ng-model="ageSco" ng-value="ageSco"></td>
+            </tr>
+            <tr>
+                <td>3岁~6岁、≥70岁以上</td>
+                <td align="center">2</td>
+                <td><input type="number" flex class="noborder2" ng-model="ageSco" ng-value="ageSco"></td>
+                <td>装有起搏器、左和右束支传导阻滞、心脏支架</td>
+                <td align="center">1</td>
+                <td><input type="number" flex class="noborder2" ng-model="ageSco" ng-value="ageSco"></td>
+            </tr>
+            <tr>
+                <td>6岁~12岁</td>
+                <td align="center">0.5</td>
+                <td><input type="number" flex class="noborder2" ng-model="ageSco" ng-value="ageSco"></td>
+                <td>心功能Ⅲ级以上、室早2联率等快速型心律失常</td>
+                <td align="center">1</td>
+                <td><input type="number" flex class="noborder2" ng-model="ageSco" ng-value="ageSco"></td>
+            </tr>
+            <tr>
+                <td>≥10小时</td>
+                <td align="center">4</td>
+                <td><input type="number" flex class="noborder2" ng-model="ageSco" ng-value="ageSco"></td>
+                <td>肺部感染发热、哮喘发作期、肺结核浸润播散期、重度阻塞性肺通气功能障碍</td>
+                <td align="center">1</td>
+                <td><input type="number" flex class="noborder2" ng-model="ageSco" ng-value="ageSco"></td>
+            </tr>
+            <tr>
+                <td>≥9小时</td>
+                <td align="center">3.5</td>
+                <td><input type="number" flex class="noborder2" ng-model="ageSco" ng-value="ageSco"></td>
+                <td>体重指数BNI(KG/M*M)≥32</td>
+                <td align="center">1</td>
+                <td><input type="number" flex class="noborder2" ng-model="ageSco" ng-value="ageSco"></td>
+            </tr>
+            <tr>
+                <td>≥8小时</td>
+                <td align="center">3</td>
+                <td><input type="number" flex class="noborder2" ng-model="ageSco" ng-value="ageSco"></td>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td>≥7小时</td>
+                <td align="center">2.5</td>
+                <td><input type="number" flex class="noborder2" ng-model="ageSco" ng-value="ageSco"></td>
+                <td>国家法定节假日</td>
+                <td align="center">0.5</td>
+                <td><input type="number" flex class="noborder2" ng-model="ageSco" ng-value="ageSco"></td>
+            </tr>
+            <tr>
+                <td>≥6小时</td>
+                <td align="center">2</td>
+                <td><input type="number" flex class="noborder2" ng-model="ageSco" ng-value="ageSco"></td>
+                <td>加班(私人关系只加0.3)</td>
+                <td align="center">1</td>
+                <td><input type="number" flex class="noborder2" ng-model="ageSco" ng-value="ageSco"></td>
+            </tr>
+            <tr>
+                <td>≥5小时</td>
+                <td align="center">1.5</td>
+                <td><input type="number" flex class="noborder2" ng-model="ageSco" ng-value="ageSco"></td>
+                <td>复苏室班附带手术(当天值班下午的急诊不计)</td>
+                <td align="center">0.5</td>
+                <td><input type="number" flex class="noborder2" ng-model="ageSco" ng-value="ageSco"></td>
+            </tr>
+            <tr>
+                <td>≥4小时</td>
+                <td align="center">1</td>
+                <td><input type="number" flex class="noborder2" ng-model="ageSco" ng-value="ageSco"></td>
+                <td>科间会诊</td>
+                <td align="center">1</td>
+                <td><input type="number" flex class="noborder2" ng-model="ageSco" ng-value="ageSco"></td>
+            </tr>
+            <tr>
+                <td>≥3小时</td>
+                <td align="center">0.5</td>
+                <td><input type="number" flex class="noborder2" ng-model="ageSco" ng-value="ageSco"></td>
+                <td>16:00以后的2h以上急诊手术</td>
+                <td align="center">0.5</td>
+                <td><input type="number" flex class="noborder2" ng-model="ageSco" ng-value="ageSco"></td>
+            </tr>
+            <tr>
+                <td>麻醉开始时间：</td>
+                <td></td>
+                <td></td>
+                <td>夜班0:00以后结束的手术</td>
+                <td align="center">0.5</td>
+                <td><input type="number" flex class="noborder2" ng-model="ageSco" ng-value="ageSco"></td>
+            </tr>
+            <tr>
+                <td>出手术室时间：</td>
+                <td></td>
+                <td></td>
+                <td>C型病例</td>
+                <td align="center">0.5</td>
+                <td><input type="number" flex class="noborder2" ng-model="ageSco" ng-value="ageSco"></td>
+            </tr>
+            <tr>
+                <td>&nbsp;</td>
+                <td>&nbsp;</td>
+                <td>&nbsp;</td>
+                <td>D型病例</td>
+                <td align="center">1</td>
+                <td><input type="number" flex class="noborder2" ng-model="ageSco" ng-value="ageSco"></td>
+            </tr>
+            <tr>
+                <td>中心静脉穿刺术</td>
+                <td align="center">0.3</td>
+                <td><input type="number" flex class="noborder2" ng-model="ageSco" ng-value="ageSco"></td>
+                <td style="border: 0px;">复苏室医师病例总分值20%提计</td>
+                <td style="border: 0px;" colspan="2">0.2*总分</td>
+            </tr>
+            <tr>
+                <td>动脉穿刺术</td>
+                <td align="center">0.3</td>
+                <td><input type="number" flex class="noborder2" ng-model="ageSco" ng-value="ageSco"></td>
+                <td style="border: 0px;">上级电话指示或被请示(站台费不计)</td>
+                <td style="border: 0px;" colspan="2">0.25*总分</td>
+            </tr>
+            <tr>
+                <td>困难插管、穿刺(请上级医师2次以上)</td>
+                <td align="center">1</td>
+                <td><input type="number" flex class="noborder2" ng-model="ageSco" ng-value="ageSco"></td>
+                <td style="border: 0px;">参与难题解决(计1/3站台费)</td>
+                <td style="border: 0px;" colspan="2">0.33*总分</td>
+            </tr>
+            <tr>
+                <td>双腔支气管插管、经鼻插管</td>
+                <td align="center">1</td>
+                <td><input type="number" flex class="noborder2" ng-model="ageSco" ng-value="ageSco"></td>
+                <td style="border: 0px;">全程指导(计2/3站台费)</td>
+                <td style="border: 0px;" colspan="2">0.66*总分</td>
+            </tr>
+        </table>
+        <div class="form-group" layout layout-wrap="wrap" layout-align="space-between end">
+            <span>合计(3h以上全麻分值再乘以1.3计算)：</span>
+        </div>
+        <div class="form-group" layout layout-wrap="wrap" layout-align="space-between end">
+            <span layout flex=20>主麻医师：</span>
+            <span layout flex=20>复苏室医师：</span>
+        </div>
+        <div class="form-group" layout layout-wrap="wrap" layout-align="space-between end">
+            <span layout flex=20>上级医师：</span>
+            <span layout flex=20>核对医师：</span>
+        </div>
+    </div>
+</div>

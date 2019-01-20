@@ -1,0 +1,10 @@
+<div id="editDocPage">
+<div class="text-right form-group">
+	<button type="button" class="btn btn-primary"  ng-if="permission.indexOf('ADD')>-1"  ng-click="savedoc()">保存</button>　
+	<button type="button" class="btn btn-primary"  ng-if="permission.indexOf('ADD')>-1"  ng-click="submitdoc()">提交</button>　
+	<button type="button" class="btn btn-primary"  ng-if="permission.indexOf('ADD')>-1"  ng-click="showdoc()">预览</button>　　
+</div>
+<div class="row contentdiv">
+	<iframe src="./app/page/sysManage/configmanage/userDefinedDoc/editDoc/editDocument.html" name="ifr" id="ifr" width="1100" height="850" scrolling="no"  style="border: none;" ></iframe>
+</div>
+</div>

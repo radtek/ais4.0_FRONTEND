@@ -1,0 +1,14 @@
+Windows Registry Editor Version 5.00
+
+[HKEY_CLASSES_ROOT\aaaa]
+@="URL:aaaa Protocol Handler"
+"URL Protocol"=""
+
+[HKEY_CLASSES_ROOT\aaaa\DefaultIcon]
+@="C:\\Landwind\\Kcis\Kcis.exe"
+
+
+[HKEY_CLASSES_ROOT\aaaa\shell]
+[HKEY_CLASSES_ROOT\aaaa\shell\open]
+[HKEY_CLASSES_ROOT\aaaa\shell\open\command]
+@="\"C:\\Landwind\\Kcis\Kcis.exe \" \"%1\""

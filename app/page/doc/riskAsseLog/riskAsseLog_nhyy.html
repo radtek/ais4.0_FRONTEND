@@ -1,0 +1,311 @@
+<div id="print-region">
+    <div id="riskAsseLogNhyy" class="page-print" ng-class="{true:'end-state'}[vm.optRiskEva.processState == 'END' || setting.readonly]">
+        <header layout="column" layout-align="center center">
+            <h3>手术室压疮风险评估</h3>
+        </header>
+        <div class="form-group" layout layout-align="space-between end">
+            <span layout>科室：<a flex>{{vm.regOpt.deptName}}</a></span>&nbsp;
+            <span layout>床号：<a flex>{{vm.regOpt.bed}}</a></span>&nbsp;
+            <span layout>住院号：<a flex>{{vm.regOpt.hid}}</a></span>&nbsp;
+            <span layout>患者姓名：<a flex>{{vm.regOpt.name}}</a></span>&nbsp;
+            <span layout>手术名称：<a flex>{{vm.regOpt.designedOptName}}</a></span>
+        </div>
+        <table class="riskTab" width="100%" border="1">
+            <tr>
+                <td rowspan="2" align="center">评价内容</td>
+                <td colspan="4" align="center">评价计分标准</td>
+                <td colspan="4" align="center">评估时间和结果</td>
+            </tr>
+            <tr>
+                <td align="center">1</td>
+                <td align="center">2</td>
+                <td align="center">3</td>
+                <td align="center">4</td>
+                <td align="center" width="11%">术前</td>
+                <td align="center" width="11%">术中</td>
+                <td align="center" width="11%">
+                    <input type="text" flex class="noborder2" ng-model="vm.bradenDetailList[2].type" ng-value="vm.bradenDetailList[2].type">
+                </td>
+            </tr>
+            <tr>
+                <td align="center">年龄</td>
+                <td align="center">＜50岁</td>
+                <td align="center">50~64岁</td>
+                <td align="center">65~79岁</td>
+                <td align="center">≥80岁</td>
+                <td align="center">
+                    <input type="number" flex min="1" max="4" class="noborder2" ng-change="vm.computeTotal()" ng-model="vm.bradenDetailList[0].ageSco" ng-value="vm.bradenDetailList[0].ageSco">
+                </td>
+                <td align="center">
+                    <input type="number" flex min="1" max="4" class="noborder2" ng-change="vm.computeTotal()" ng-model="vm.bradenDetailList[1].ageSco" ng-value="vm.bradenDetailList[1].ageSco">
+                </td>
+                <td align="center">
+                    <input type="number" flex min="1" max="4" class="noborder2" ng-change="vm.computeTotal()" ng-model="vm.bradenDetailList[2].ageSco" ng-value="vm.bradenDetailList[2].ageSco">
+                </td>
+            </tr>
+            <tr>
+                <td align="center">体质指数（BMI）</td>
+                <td align="center">18.5~23.9</td>
+                <td align="center">17.5＜BMI＜18.5<br>24.0≤BMI≤27.9</td>
+                <td align="center">16.0≤BMI≤17.5<br>28.0≤BMI≤40.0</td>
+                <td align="center">BMI＜16<br>BMI＞40</td>
+                <td align="center">
+                    <input type="number" flex min="1" max="4" class="noborder2" ng-change="vm.computeTotal()" ng-model="vm.bradenDetailList[0].bmiSco" ng-value="vm.bradenDetailList[0].bmiSco">
+                </td>
+                <td align="center">
+                    <input type="number" flex min="1" max="4" class="noborder2" ng-change="vm.computeTotal()" ng-model="vm.bradenDetailList[1].bmiSco" ng-value="vm.bradenDetailList[1].bmiSco">
+                </td>
+                <td align="center">
+                    <input type="number" flex min="1" max="4" class="noborder2" ng-change="vm.computeTotal()" ng-model="vm.bradenDetailList[2].bmiSco" ng-value="vm.bradenDetailList[2].bmiSco">
+                </td>
+            </tr>
+            <tr>
+                <td align="center">受力点皮肤</td>
+                <td align="center">完好</td>
+                <td align="center">红斑或潮湿</td>
+                <td align="center">瘀斑或水泡</td>
+                <td align="center">破损</td>
+                <td align="center">
+                    <input type="number" flex min="1" max="4" class="noborder2" ng-change="vm.computeTotal()" ng-model="vm.bradenDetailList[0].skinSco" ng-value="vm.bradenDetailList[0].skinSco">
+                </td>
+                <td align="center">
+                    <input type="number" flex min="1" max="4" class="noborder2" ng-change="vm.computeTotal()" ng-model="vm.bradenDetailList[1].skinSco" ng-value="vm.bradenDetailList[1].skinSco">
+                </td>
+                <td align="center">
+                    <input type="number" flex min="1" max="4" class="noborder2" ng-change="vm.computeTotal()" ng-model="vm.bradenDetailList[2].skinSco" ng-value="vm.bradenDetailList[2].skinSco">
+                </td>
+            </tr>
+            <tr>
+                <td align="center">手术体位</td>
+                <td align="center">仰卧位<br>侧卧位</td>
+                <td align="center">局部麻醉下的俯卧位</td>
+                <td align="center">斜坡卧位</td>
+                <td align="center">全身麻醉下的俯卧位</td>
+                <td align="center">
+                    <input type="number" flex min="1" max="4" class="noborder2" ng-change="vm.computeTotal()" ng-model="vm.bradenDetailList[0].optBodySco" ng-value="vm.bradenDetailList[0].optBodySco">
+                </td>
+                <td align="center">
+                    <input type="number" flex min="1" max="4" class="noborder2" ng-change="vm.computeTotal()" ng-model="vm.bradenDetailList[1].optBodySco" ng-value="vm.bradenDetailList[1].optBodySco">
+                </td>
+                <td align="center">
+                    <input type="number" flex min="1" max="4" class="noborder2" ng-change="vm.computeTotal()" ng-model="vm.bradenDetailList[2].optBodySco" ng-value="vm.bradenDetailList[2].optBodySco">
+                </td>
+            </tr>
+            <tr>
+                <td align="center">预计术中施加外力</td>
+                <td align="center">未施加外力</td>
+                <td align="center">存在摩擦力或剪切力</td>
+                <td align="center">存在冲击力</td>
+                <td align="center">同时存在摩擦力、剪切力和冲击力</td>
+                <td align="center">
+                    <input type="number" flex min="1" max="4" class="noborder2" ng-change="vm.computeTotal()" ng-model="vm.bradenDetailList[0].exforceSco" ng-value="vm.bradenDetailList[0].exforceSco">
+                </td>
+                <td align="center">
+                    <input type="number" flex min="1" max="4" class="noborder2" ng-change="vm.computeTotal()" ng-model="vm.bradenDetailList[1].exforceSco" ng-value="vm.bradenDetailList[1].exforceSco">
+                </td>
+                <td align="center">
+                    <input type="number" flex min="1" max="4" class="noborder2" ng-change="vm.computeTotal()" ng-model="vm.bradenDetailList[2].exforceSco" ng-value="vm.bradenDetailList[2].exforceSco">
+                </td>
+            </tr>
+            <tr>
+                <td align="center">预计手术时间</td>
+                <td align="center">＜3h</td>
+                <td align="center">3~4h</td>
+                <td align="center">＞4h而≤5h</td>
+                <td align="center">＞5h</td>
+                <td align="center">
+                    <input type="number" flex min="1" max="4" class="noborder2" ng-change="vm.computeTotal()" ng-model="vm.bradenDetailList[0].operTimeSco" ng-value="vm.bradenDetailList[0].operTimeSco">
+                </td>
+                <td align="center">
+                    <input type="number" flex min="1" max="4" class="noborder2" ng-change="vm.computeTotal()" ng-model="vm.bradenDetailList[1].operTimeSco" ng-value="vm.bradenDetailList[1].operTimeSco">
+                </td>
+                <td align="center">
+                    <input type="number" flex min="1" max="4" class="noborder2" ng-change="vm.computeTotal()" ng-model="vm.bradenDetailList[2].operTimeSco" ng-value="vm.bradenDetailList[2].operTimeSco">
+                </td>
+            </tr>
+            <tr>
+                <td align="center">特殊手术原因</td>
+                <td colspan="4" class="special">
+                    1、全身麻醉俯卧位时，患者的面部皮肤菲薄、浮肿、瘦削 <span class="special1">+3分</span><br>
+                    2、控制性降压、低温麻醉 <span class="special2">+3分</span><br>
+                    3、其他情况（如休克、水肿、严重创伤）酌情 <span class="special3">+1~4分</span><br>
+                    控制性降压指成年人收缩压将至8.0~9.3kPa(60~70mmhg)，老年人将至10.7kPa(80mmhg)
+                </td>
+                <td align="center"><input type="number" flex min="1" max="4" class="noborder2" ng-change="vm.computeTotal()" ng-model="vm.bradenDetailList[0].operFactorSco" ng-value="vm.bradenDetailList[0].operFactorSco"></td>
+                <td align="center"><input type="number" flex min="1" max="4" class="noborder2" ng-change="vm.computeTotal()" ng-model="vm.bradenDetailList[1].operFactorSco" ng-value="vm.bradenDetailList[1].operFactorSco"></td>
+                <td align="center">
+                    <input type="number" flex min="1" max="4" class="noborder2" ng-change="vm.computeTotal()" ng-model="vm.bradenDetailList[2].operFactorSco" ng-value="vm.bradenDetailList[2].operFactorSco">
+                </td>
+            </tr>
+            <tr>
+                <td align="center">评价总分</td>
+                <td colspan="4">&nbsp;</td>
+                <td align="center">{{vm.bradenDetailList[0].totalSco}}</td>
+                <td align="center">{{vm.bradenDetailList[1].totalSco}}</td>
+                <td align="center">{{vm.bradenDetailList[2].totalSco}}</td>
+            </tr>
+            <tr>
+                <td align="center">危险程度</td>
+                <td colspan="4">&nbsp;</td>
+                <td align="center">
+                    <oi-select name="dangerLevel" class="noborder3" oi-options="item.codeValue as item.codeName for item in vm.dangerous" oi-select-options="{listFilter: 'oiSelectAscSort:[\'codeName\']'}" ng-model="vm.bradenDetailList[0].dangerLevel"></oi-select>
+                </td>
+                <td align="center">
+                    <oi-select name="dangerLevel" class="noborder3" oi-options="item.codeValue as item.codeName for item in vm.dangerous" oi-select-options="{listFilter: 'oiSelectAscSort:[\'codeName\']'}" ng-model="vm.bradenDetailList[1].dangerLevel"></oi-select>
+                </td>
+                <td align="center">
+                    <oi-select name="dangerLevel" class="noborder3" oi-options="item.codeValue as item.codeName for item in vm.dangerous" oi-select-options="{listFilter: 'oiSelectAscSort:[\'codeName\']'}" ng-model="vm.bradenDetailList[2].dangerLevel"></oi-select>
+                </td>
+            </tr>
+            <tr>
+                <td align="center">评估者</td>
+                <td colspan="4">&nbsp;</td>
+                <td align="center">
+                    <oi-select class="noborder3" ng-model="vm.bradenDetailList[0].evaluator" oi-options="i.userName as i.name for i in nurseList | limitTo: 100" oi-select-options="{ listFilter: 'oiSelectAscSort:[\'username\', \'name\', \'pinYin\']'}"></oi-select>
+                </td>
+                <td align="center">
+                    <oi-select class="noborder3" ng-model="vm.bradenDetailList[1].evaluator" oi-options="i.userName as i.name for i in nurseList | limitTo: 100" oi-select-options="{ listFilter: 'oiSelectAscSort:[\'username\', \'name\', \'pinYin\']'}"></oi-select>
+                </td>
+                <td align="center">
+                    <oi-select class="noborder3" ng-model="vm.bradenDetailList[2].evaluator" oi-options="i.userName as i.name for i in nurseList | limitTo: 100" oi-select-options="{ listFilter: 'oiSelectAscSort:[\'username\', \'name\', \'pinYin\']'}"></oi-select>
+                </td>
+            </tr>
+        </table>
+        <div class="form-group" layout layout-wrap="wrap" layout-align="space-between start">
+            <span>注：如患者有水肿，则不评价体质指数；红斑指压之不退色。</span>
+        </div>
+        <div class="form-group" layout layout-wrap="wrap" layout-align="center start">
+            <h3>评分标准及相关护理措施指导</h3>
+        </div>
+        <div class="form-group" layout layout-wrap="wrap" layout-align="space-between start">
+            <span>1、<strong>中度危险≤10分：</strong>分值较低，发生压疮风险相对较低，护理干预措施包括：</span>
+        </div>
+        <div class="form-group" layout="column" layout-wrap="wrap" layout-align="space-between start">
+            <p class="indent">1) 常规执行手术体位摆放的基本原则和要求；</p>
+            <p class="indent">2) 骨隆突受压部位使用海绵软垫、布垫或采用悬空法；</p>
+            <p class="indent">3) 严格落实术中患者保温措施，术野铺单前、手术缝皮后将室温调高至26~28℃，术中注意非手术野身体遮盖，冲洗液加温至36~37℃，有条件者给予加温输血、输液，严防术中患者低体温；</p>
+            <p class="indent">4) 保持手术铺巾干燥、平整，防止皮肤消毒液、冲洗液流至受压部位。</p>
+        </div>
+        <div class="form-group" layout layout-wrap="wrap" layout-align="space-between start">
+            <span>2、<strong>高度危险10~11分：</strong>分值较高，有发生术中压疮的高度危险，必须积极防护，以规避压疮风险。除常规护理外，强化措施包括：</span>
+        </div>
+        <div class="form-group" layout="column" layout-wrap="wrap" layout-align="space-between start">
+            <p class="indent">1) 在通常的防护措施基础上，对骨隆突处的局部皮肤使用高分子聚氨酯凝胶体位垫；</p>
+            <p class="indent">2) 受压局部粘贴安普贴凝胶敷料，增加支撑点的抗压性，有效降低震动和分散压力。</p>
+        </div>
+        <div class="form-group" layout layout-wrap="wrap" layout-align="space-between start">
+            <span><strong>极度危险≥12分：</strong>分值高，压疮风险极大，属发生术中压疮的非常危险人群，要求填写评估表并上报护理部。</span>
+        </div>
+    </div>
+    <div id="riskAsseLogNhyy" class="page-print" ng-class="{true:'end-state'}[vm.optRiskEva.processState == 'END' || setting.readonly]">
+        <div class="form-group" layout>
+            <span><strong>体位</strong></span>
+            <div layout="column">
+                <div class="indent1">
+                    <checkbox ng-model="vm.bradenEvaluate.optBody" ng-true-value="1" ng-false-value="0">仰卧位</checkbox>
+                    <checkbox ng-model="vm.bradenEvaluate.optBody" ng-true-value="2" ng-false-value="0">侧卧位</checkbox>
+                    <checkbox ng-model="vm.bradenEvaluate.optBody" ng-true-value="3" ng-false-value="0">俯卧位</checkbox>
+                    <checkbox ng-model="vm.bradenEvaluate.optBody" ng-true-value="4" ng-false-value="0">截石位</checkbox>
+                </div>
+                <div class="indent1">
+                    <checkbox ng-model="vm.bradenEvaluate.optBody" ng-true-value="5" ng-false-value="0">侧俯卧位</checkbox>
+                    <span>其他</span>
+                    <input type="text" flex class="noborder3" maxlength="25" ng-model="vm.bradenEvaluate.optBodyOther" ng-value="vm.bradenEvaluate.optBodyOther">
+                </div>
+            </div>
+        </div>
+        <div class="form-group" layout>
+            <span><strong>受压部位</strong></span>
+            <div layout="column">
+                <div class="indent2">
+                    <checkbox ng-model="pressurePart[0]" ng-true-value="1" ng-false-value="0">额面部</checkbox>
+                    <checkbox ng-model="pressurePart[1]" ng-true-value="1" ng-false-value="0">颧骨</checkbox>
+                    <checkbox ng-model="pressurePart[2]" ng-true-value="1" ng-false-value="0">下颌部</checkbox>
+                    <checkbox ng-model="pressurePart[3]" ng-true-value="1" ng-false-value="0">耳廓</checkbox>
+                    <checkbox ng-model="pressurePart[4]" ng-true-value="1" ng-false-value="0">枕骨</checkbox>
+                </div>
+                <div class="indent2">
+                    <checkbox ng-model="pressurePart[5]" ng-true-value="1" ng-false-value="0">肩胛部</checkbox>
+                    <checkbox ng-model="pressurePart[6]" ng-true-value="1" ng-false-value="0">胸骨</checkbox>
+                    <checkbox ng-model="pressurePart[7]" ng-true-value="1" ng-false-value="0">肋骨</checkbox>
+                    <checkbox ng-model="pressurePart[8]" ng-true-value="1" ng-false-value="0">肘部</checkbox>
+                    <checkbox ng-model="pressurePart[9]" ng-true-value="1" ng-false-value="0">膝部</checkbox>
+                </div>
+                <div class="indent2">
+                    <checkbox ng-model="pressurePart[10]" ng-true-value="1" ng-false-value="0">耻骨联合</checkbox>
+                    <checkbox ng-model="pressurePart[11]" ng-true-value="1" ng-false-value="0">骼前上棘</checkbox>
+                    <checkbox ng-model="pressurePart[12]" ng-true-value="1" ng-false-value="0">髋部</checkbox>
+                    <checkbox ng-model="pressurePart[13]" ng-true-value="1" ng-false-value="0">骶尾部</checkbox>
+                </div>
+                <div class="indent2">
+                    <checkbox ng-model="pressurePart[14]" ng-true-value="1" ng-false-value="0">内外踝</checkbox>
+                    <checkbox ng-model="pressurePart[15]" ng-true-value="1" ng-false-value="0">足跟</checkbox>
+                    <checkbox ng-model="pressurePart[16]" ng-true-value="1" ng-false-value="0">足趾处</checkbox>
+                    <checkbox ng-model="pressurePart[17]" ng-true-value="1" ng-false-value="0">脊柱隆突处</checkbox>
+                </div>
+                <div class="indent2">
+                    <span>其他部位</span>
+                    <input type="text" flex class="noborder3" maxlength="25" ng-model="vm.bradenEvaluate.pressurePartOther" ng-value="vm.bradenEvaluate.pressurePartOther">
+                </div>
+            </div>
+        </div>
+        <div class="form-group" layout>
+            <span><strong>预防措施</strong></span>
+        </div>
+        <div class="form-group" layout>
+            <span><strong>术前</strong></span>
+            <div class="indent1">
+                    <p>1、<checkbox ng-model="prePrecaution[0]" ng-true-value="1" ng-false-value="0">评估患者皮肤完整性</checkbox>
+                    <input type="text" flex class="noborder3" maxlength="25" ng-model="vm.bradenEvaluate.skinIntegrity" ng-value="vm.bradenEvaluate.skinIntegrity"></p>
+                    <p>2、<checkbox ng-model="prePrecaution[1]" ng-true-value="1" ng-false-value="0">调节室温适宜</checkbox></p>
+                    <p>3、<checkbox ng-model="prePrecaution[2]" ng-true-value="1" ng-false-value="0">保持床单位平整干燥</checkbox></p>
+                    <p>4、<checkbox ng-model="prePrecaution[3]" ng-true-value="1" ng-false-value="0">摆放体位及搬运患者避免拖拽</checkbox></p>
+                    <p>5、<checkbox ng-model="prePrecaution[4]" ng-true-value="1" ng-false-value="0">受压皮肤凝胶用具的使用：</checkbox>
+                    <checkbox ng-model="gelAppliance[0]" ng-true-value="1" ng-false-value="0">头圈</checkbox>
+                    <checkbox ng-model="gelAppliance[1]" ng-true-value="1" ng-false-value="0">仰卧位垫</checkbox>
+                    <checkbox ng-model="gelAppliance[2]" ng-true-value="1" ng-false-value="0">侧卧位垫</checkbox></p>
+                    <p class="indent3">
+                        <checkbox ng-model="gelAppliance[3]" ng-true-value="1" ng-false-value="0">肩垫</checkbox>
+                        <checkbox ng-model="gelAppliance[4]" ng-true-value="1" ng-false-value="0">足跟垫</checkbox>
+                        <checkbox ng-model="gelAppliance[5]" ng-true-value="1" ng-false-value="0">膝垫</checkbox>
+                    </p>
+                    <p class="indent3">
+                        <checkbox ng-model="vm.optCareRecord.skin1.a.checked" ng-true-value="1" ng-false-value="0">眼贴的使用</checkbox>
+                    </p>
+                    <p>6、<checkbox ng-model="prePrecaution[5]" ng-true-value="1" ng-false-value="0">局部受压处泡沫/水胶体敷料的使用</checkbox></p>
+            </div>
+        </div>
+        <div class="form-group" layout flex>
+            <span><strong>术中</strong></span>
+            <div class="indent1">
+                    <p>1、<checkbox ng-model="midPrecaution[0]" ng-true-value="1" ng-false-value="0">避免各导联线及管道受压</checkbox></p>
+                    <p>2、<checkbox ng-model="midPrecaution[1]" ng-true-value="1" ng-false-value="0">防水敷料或切口膜的使用</checkbox></p>
+                    <p>3、<checkbox ng-model="midPrecaution[2]" ng-true-value="1" ng-false-value="0">约束带平整松紧适宜</checkbox></p>
+                    <p>4、<checkbox ng-model="midPrecaution[3]" ng-true-value="1" ng-false-value="0">骨隆突处、受压点垫软枕或悬空</checkbox></p>
+                    <p>5、<checkbox ng-model="midPrecaution[4]" ng-true-value="1" ng-false-value="0">按摩骨隆突或轻抬受压点</checkbox></p>
+                    <p>6、<checkbox ng-model="midPrecaution[5]" ng-true-value="1" ng-false-value="0">更换氧饱和度夹部位</checkbox></p>
+                    <p>7、<checkbox ng-model="midPrecaution[6]" ng-true-value="1" ng-false-value="0">输液输血加温</checkbox></p>
+                    <p>8、<checkbox ng-model="midPrecaution[7]" ng-true-value="1" ng-false-value="0">冲洗液加温</checkbox></p>
+                    <p>9、<checkbox ng-model="midPrecaution[8]" ng-true-value="1" ng-false-value="0">改变局部受压力度（时间）</checkbox><input type="text" flex class="noborder3" maxlength="25" ng-model="vm.bradenEvaluate.chgLocalPress" ng-value="vm.bradenEvaluate.chgLocalPress"></p>
+                    <p>10、<checkbox ng-model="midPrecaution[9]" ng-true-value="1" ng-false-value="0">其他措施</checkbox><input type="text" flex class="noborder3" maxlength="25" ng-model="vm.bradenEvaluate.midPrecautionOther" ng-value="vm.bradenEvaluate.midPrecautionOther"></p>
+                    <p>
+                        11、<checkbox ng-model="midPrecaution[10]" ng-true-value="1" ng-false-value="0">患者特殊情况备注：</checkbox>
+                        <checkbox ng-model="specialCase[0]" ng-true-value="1" ng-false-value="0">大出血</checkbox>
+                        <checkbox ng-model="specialCase[1]" ng-true-value="1" ng-false-value="0">心跳呼吸骤停</checkbox>
+                        <checkbox ng-model="specialCase[2]" ng-true-value="1" ng-false-value="0">其他</checkbox>
+                        <input type="text" flex class="noborder3" maxlength="25" ng-model="vm.bradenEvaluate.specialCaseOther" ng-value="vm.bradenEvaluate.specialCaseOther">
+                    </p>
+            </div>
+        </div>
+        <div class="form-group" layout flex>
+            <span><strong>术后</strong></span>
+            <div class="indent1" layout flex>
+                <span>皮肤情况</span>
+                <input type="text" flex class="noborder3" ng-model="vm.bradenEvaluate.postSkinCase" ng-value="vm.bradenEvaluate.postSkinCase">
+            </div>
+        </div>
+        <div class="form-group" layout flex>
+            <span>交接班护士：</span>
+        </div>
+    </div>
+</div>

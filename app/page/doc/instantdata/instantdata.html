@@ -1,0 +1,27 @@
+<div id="instantdata-div">
+	<table width="100%" border="1"  cellpadding="0" cellspacing="0"  class="table-in-chart">
+	  <tr>
+	    <td width="88%" rowspan="6">
+	    <div e-chart style="width: 100%; height:767px;" class="echarts" e-config="vm.monECfg" e-option="vm.monEOpt1"></div>
+	    </td>
+	    <td width="6%" class="titletdECG"><span>心电<br/>ECG</span></td>
+	    <td width="6%" class="titletdECG1">{{vm.ecg}}<br/>{{vm.hr}}</td>
+	  </tr>
+	  <tr>
+	    <td class="titletdSPO2">氧饱和度<br/>SpO2</td>
+	    <td class="titletdSPO22">{{vm.spo2}}%<br/>{{vm.pr}}</td>
+	  </tr>
+	  <tr>
+	    <td class="titletdCO2">二氧化碳<br/>CO2</td>
+	    <td class="titletdCO22">{{vm.co2}}<br/>{{vm.co22}}</td>
+	  </tr>
+	  <tr>
+	    <td class="titletdIBP">动脉压<br/>ARt</td>
+	    <td class="titletdIBP2">{{vm.art}}<br/>{{vm.art2}}</td>
+	  </tr>	 
+	  <tr>
+	    <td class="titletdRESP">呼吸<br/>RESP</td>
+	    <td class="titletdRESP2">{{vm.resp}}</td>
+	  </tr>	  
+	</table>
+</div>

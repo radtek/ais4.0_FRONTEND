@@ -1,0 +1,331 @@
+<div id="print-region">
+    <div class="page-print" id="shutTranLogNhyy" ng-class="{true:'end-state'}[processState == 'END' && !saveActive || setting.readonly]">
+        <header layout="column" layout-align="center center" class="noTop">
+            <h3>{{docInfo.beName}}手术病人交接及护理记录单</h3>
+        </header>
+        <div class="form-group" layout layout-wrap="wrap" layout-align="space-between end">
+            <span layout>科别：<a flex>{{vm.regOptItem.deptName}}</a></span>
+            <span layout>床位：<a flex>{{vm.regOptItem.bed}}</a></span>
+            <span layout>姓名：<a flex>{{vm.regOptItem.name}}</a></span>
+            <span layout>性别：<a flex>{{vm.regOptItem.sex}}</a></span>
+            <span layout>住院号：<a flex>{{vm.regOptItem.hid}}</a></span>
+            <span layout>手术日期：<a flex>{{vm.regOptItem.operaDate | date: 'yyyy 年 MM 月 dd 日'}}</a></span>
+        </div>
+        <table>
+            <tr>
+                <td colspan="9">
+                    术晨  体温：<input flex type="number" class="noborder2" ng-model="vm.optCareRecord.temp">℃&nbsp;&nbsp;脉搏：<input flex type="number" class="noborder2" ng-model="vm.optCareRecord.pr">次/分&nbsp;&nbsp;呼吸：<input flex type="number" class="noborder2" ng-model="vm.optCareRecord.rr">次/分&nbsp;&nbsp;血压：<input flex type="number" class="noborder2" ng-model="vm.optCareRecord.bpDias">/<input flex type="number" class="noborder2" ng-model="vm.optCareRecord.bpSys">mmHg&nbsp;&nbsp;体重：<input flex type="number" class="noborder2" ng-model="vm.optCareRecord.weight">Kg
+                </td>
+            </tr>
+            <tr>
+                <td colspan="9">
+                    <span>意识状态：</span>
+                    <checkbox ng-model="vm.optCareRecord.conscious" ng-true-value="1" ng-false-value="0">清醒</checkbox>
+                    <checkbox ng-model="vm.optCareRecord.conscious" ng-true-value="2" ng-false-value="0">嗜睡</checkbox>
+                    <checkbox ng-model="vm.optCareRecord.conscious" ng-true-value="3" ng-false-value="0">模糊</checkbox>
+                    <checkbox ng-model="vm.optCareRecord.conscious" ng-true-value="4" ng-false-value="0">昏睡</checkbox>
+                    <checkbox ng-model="vm.optCareRecord.conscious" ng-true-value="5" ng-false-value="0">浅昏迷</checkbox>
+                    <checkbox ng-model="vm.optCareRecord.conscious" ng-true-value="6" ng-false-value="0">中昏迷</checkbox>
+                    <checkbox ng-model="vm.optCareRecord.conscious" ng-true-value="7" ng-false-value="0">深昏迷</checkbox>
+                    <checkbox ng-model="vm.optCareRecord.conscious" ng-true-value="8" ng-false-value="0">其他：</checkbox>
+                    <input type="text" flex class="noborder3" maxlength="25" ng-model="vm.optCareRecord.consciousOther" ng-value="vm.optCareRecord.consciousOther">
+                </td>
+            </tr>
+            <tr>
+                <td align="center">术前准备</td>
+                <td align="center">有</td>
+                <td align="center">否</td>
+                <td align="center">术前准备</td>
+                <td align="center">有</td>
+                <td align="center">否</td>
+                <td align="center">术前准备</td>
+                <td align="center">有</td>
+                <td align="center">否</td>
+            </tr>
+            <tr>
+                <td align="left">1、月经来潮</td>
+                <td align="center"><checkbox ng-model="vm.optCareRecord.prePreparationMap.a" ng-true-value="'1'" ng-false-value="'0'"></checkbox></td>
+                <td align="center"><checkbox ng-model="vm.optCareRecord.prePreparationMap.a" ng-true-value="'2'" ng-false-value="'0'"></checkbox></td>
+                <td align="left">7、隐形眼镜</td>
+                <td align="center"><checkbox ng-model="vm.optCareRecord.prePreparationMap.b" ng-true-value="'1'" ng-false-value="'0'"></checkbox></td>
+                <td align="center"><checkbox ng-model="vm.optCareRecord.prePreparationMap.b" ng-true-value="'2'" ng-false-value="'0'"></checkbox></td>
+                <td align="left">13、禁食禁饮</td>
+                <td align="center"><checkbox ng-model="vm.optCareRecord.prePreparationMap.c" ng-true-value="'1'" ng-false-value="'0'"></checkbox></td>
+                <td align="center"><checkbox ng-model="vm.optCareRecord.prePreparationMap.c" ng-true-value="'2'" ng-false-value="'0'"></checkbox></td>
+            </tr>
+            <tr>
+                <td align="left">2、发热、咳嗽</td>
+                <td align="center"><checkbox ng-model="vm.optCareRecord.prePreparationMap.d" ng-true-value="'1'" ng-false-value="'0'"></checkbox></td>
+                <td align="center"><checkbox ng-model="vm.optCareRecord.prePreparationMap.d" ng-true-value="'2'" ng-false-value="'0'"></checkbox></td>
+                <td align="left">8、戴首饰、涂口红、指甲油</td>
+                <td align="center"><checkbox ng-model="vm.optCareRecord.prePreparationMap.e" ng-true-value="'1'" ng-false-value="'0'"></checkbox></td>
+                <td align="center"><checkbox ng-model="vm.optCareRecord.prePreparationMap.e" ng-true-value="'2'" ng-false-value="'0'"></checkbox></td>
+                <td align="left">14、手术部位皮肤准备</td>
+                <td align="center"><checkbox ng-model="vm.optCareRecord.prePreparationMap.f" ng-true-value="'1'" ng-false-value="'0'"></checkbox></td>
+                <td align="center"><checkbox ng-model="vm.optCareRecord.prePreparationMap.f" ng-true-value="'2'" ng-false-value="'0'"></checkbox></td>
+            </tr>
+            <tr>
+                <td align="left">3、过敏史</td>
+                <td align="center"><checkbox ng-model="vm.optCareRecord.prePreparationMap.g" ng-true-value="'1'" ng-false-value="'0'"></checkbox></td>
+                <td align="center"><checkbox ng-model="vm.optCareRecord.prePreparationMap.g" ng-true-value="'2'" ng-false-value="'0'"></checkbox></td>
+                <td align="left">9、体内植入物</td>
+                <td align="center"><checkbox ng-model="vm.optCareRecord.prePreparationMap.h" ng-true-value="'1'" ng-false-value="'0'"></checkbox></td>
+                <td align="center"><checkbox ng-model="vm.optCareRecord.prePreparationMap.h" ng-true-value="'2'" ng-false-value="'0'"></checkbox></td>
+                <td align="left">15、体表标识</td>
+                <td align="center"><checkbox ng-model="vm.optCareRecord.prePreparationMap.i" ng-true-value="'1'" ng-false-value="'0'"></checkbox></td>
+                <td align="center"><checkbox ng-model="vm.optCareRecord.prePreparationMap.i" ng-true-value="'2'" ng-false-value="'0'"></checkbox></td>
+            </tr>
+            <tr>
+                <td align="left">4、活动假牙、松动牙</td>
+                <td align="center"><checkbox ng-model="vm.optCareRecord.prePreparationMap.j" ng-true-value="'1'" ng-false-value="'0'"></checkbox></td>
+                <td align="center"><checkbox ng-model="vm.optCareRecord.prePreparationMap.j" ng-true-value="'2'" ng-false-value="'0'"></checkbox></td>
+                <td align="left">10、全身皮肤有无缺损</td>
+                <td align="center"><checkbox ng-model="vm.optCareRecord.prePreparationMap.k" ng-true-value="'1'" ng-false-value="'0'"></checkbox></td>
+                <td align="center"><checkbox ng-model="vm.optCareRecord.prePreparationMap.k" ng-true-value="'2'" ng-false-value="'0'"></checkbox></td>
+                <td align="left">16、已排大小便</td>
+                <td align="center"><checkbox ng-model="vm.optCareRecord.prePreparationMap.l" ng-true-value="'1'" ng-false-value="'0'"></checkbox></td>
+                <td align="center"><checkbox ng-model="vm.optCareRecord.prePreparationMap.l" ng-true-value="'2'" ng-false-value="'0'"></checkbox></td>
+            </tr>
+            <tr>
+                <td align="left">5、注射术前针</td>
+                <td align="center"><checkbox ng-model="vm.optCareRecord.prePreparationMap.m" ng-true-value="'1'" ng-false-value="'0'"></checkbox></td>
+                <td align="center"><checkbox ng-model="vm.optCareRecord.prePreparationMap.m" ng-true-value="'2'" ng-false-value="'0'"></checkbox></td>
+                <td align="left">11、静脉通路</td>
+                <td align="center"><checkbox ng-model="vm.optCareRecord.prePreparationMap.n" ng-true-value="'1'" ng-false-value="'0'"></checkbox></td>
+                <td align="center"><checkbox ng-model="vm.optCareRecord.prePreparationMap.n" ng-true-value="'2'" ng-false-value="'0'"></checkbox></td>
+                <td align="left">17、更换手术衣</td>
+                <td align="center"><checkbox ng-model="vm.optCareRecord.prePreparationMap.o" ng-true-value="'1'" ng-false-value="'0'"></checkbox></td>
+                <td align="center"><checkbox ng-model="vm.optCareRecord.prePreparationMap.o" ng-true-value="'2'" ng-false-value="'0'"></checkbox></td>
+            </tr>
+            <tr>
+                <td align="left">6、带入手术室药物</td>
+                <td align="center"><checkbox ng-model="vm.optCareRecord.prePreparationMap.p" ng-true-value="'1'" ng-false-value="'0'"></checkbox></td>
+                <td align="center"><checkbox ng-model="vm.optCareRecord.prePreparationMap.p" ng-true-value="'2'" ng-false-value="'0'"></checkbox></td>
+                <td align="left">12、管道</td>
+                <td align="center"><checkbox ng-model="vm.optCareRecord.prePreparationMap.q" ng-true-value="'1'" ng-false-value="'0'"></checkbox></td>
+                <td align="center"><checkbox ng-model="vm.optCareRecord.prePreparationMap.q" ng-true-value="'2'" ng-false-value="'0'"></checkbox></td>
+                <td align="left">18、佩戴手腕带</td>
+                <td align="center"><checkbox ng-model="vm.optCareRecord.prePreparationMap.r" ng-true-value="'1'" ng-false-value="'0'"></checkbox></td>
+                <td align="center"><checkbox ng-model="vm.optCareRecord.prePreparationMap.r" ng-true-value="'2'" ng-false-value="'0'"></checkbox></td>
+            </tr>
+            <tr>
+                <td colspan="9">
+                    <span>说明：<input type="text" flex class="noborder3" style="width: 100%;" maxlength="25" ng-model="vm.optCareRecord.preDescription" ng-value="vm.optCareRecord.preDescription"></span>
+                    <div class="form-group" layout layout-wrap="wrap" layout-align="end end">
+                        <span>病房护士签名：</span>
+                        <oi-select class="noborder3 sign" ng-class="{true: 'signature', false: 'unsignature'}[hasSig]" ng-model="vm.optCareRecord.wardShiftsNurse" oi-options="i.userName as i.name for i in nurseList | limitTo: 100" oi-select-options="{ listFilter: 'oiSelectAscSort:[\'username\', \'name\', \'pinYin\']'}"></oi-select>
+                    </div>
+                    <div class="form-group" layout layout-wrap="wrap" layout-align="end end">
+                        <span>手术室护士签名：</span>
+                        <oi-select class="noborder3 sign" ng-class="{true: 'signature', false: 'unsignature'}[hasSig]" ng-model="vm.optCareRecord.shiftChangedNurse" oi-options="i.userName as i.name for i in nurseList | limitTo: 100" oi-select-options="{ listFilter: 'oiSelectAscSort:[\'username\', \'name\', \'pinYin\']'}"></oi-select>
+                    </div>
+                </td>
+            </tr>
+        </table>
+        <table style="border-top: none;">
+            <tr>
+                <td class="nobordertop" rowspan="4" width="2%">护理情况</td>
+                <td class="nobordertop" width="2%">术前</td>
+                <td class="nobordertop" colspan="3">
+                    <span>入室时间：</span><input datetimepicker="" class='noborder3 calendar sign' name="inOperRoomTime" id="datatime" dateID="signTimes-times" ng-model="vm.optCareRecord.inOperRoomTime"></input>&nbsp;&nbsp;&nbsp;
+                    <span>手术间：</span><a flex>{{vm.optCareRecord.operroom}}</a>&nbsp;&nbsp;&nbsp;
+                    <span>手术用物灭菌指示标记：</span>
+                    <checkbox ng-model="vm.optCareRecord.sterilizationMark" ng-true-value="1" ng-false-value="0">达标</checkbox><br>
+                    <span>传染病或感染情况：</span><br>
+                    <span>切口等级：</span>
+                    <checkbox ng-model="vm.optCareRecord.cutLevel" ng-true-value="1" ng-false-value="0">Ⅰ</checkbox>
+                    <checkbox ng-model="vm.optCareRecord.cutLevel" ng-true-value="2" ng-false-value="0">Ⅱ</checkbox>
+                    <checkbox ng-model="vm.optCareRecord.cutLevel" ng-true-value="3" ng-false-value="0">Ⅲ</checkbox>
+                    <checkbox ng-model="vm.optCareRecord.cutLevel" ng-true-value="4" ng-false-value="0">Ⅳ</checkbox><br>
+                    <span>乙肝：</span>
+                    <checkbox ng-model="vm.optCareRecord.hbv" ng-true-value="1" ng-false-value="0">阴性</checkbox>
+                    <checkbox ng-model="vm.optCareRecord.hbv" ng-true-value="2" ng-false-value="0">阳性</checkbox>
+                    <checkbox ng-model="vm.optCareRecord.hbv" ng-true-value="3" ng-false-value="0">未开医嘱</checkbox>
+                    <checkbox ng-model="vm.optCareRecord.hbv" ng-true-value="4" ng-false-value="0">结果未知</checkbox><br>
+                    <span>Hiv：</span>&nbsp;
+                    <checkbox ng-model="vm.optCareRecord.hiv" ng-true-value="1" ng-false-value="0">阴性</checkbox>
+                    <checkbox ng-model="vm.optCareRecord.hiv" ng-true-value="2" ng-false-value="0">阳性</checkbox>
+                    <checkbox ng-model="vm.optCareRecord.hiv" ng-true-value="3" ng-false-value="0">未开医嘱</checkbox>
+                    <checkbox ng-model="vm.optCareRecord.hiv" ng-true-value="4" ng-false-value="0">结果未知</checkbox><br>
+                    <span>其他：</span>
+                    <input type="text" flex class="noborder3" style="width: 80%;" maxlength="25" ng-model="vm.optCareRecord.otherInfectiou" ng-value="vm.optCareRecord.otherInfectiou"><br>
+                    <span>入室方式：</span>
+                    <checkbox ng-model="vm.optCareRecord.inOperWay" ng-true-value="1" ng-false-value="0">步行</checkbox>
+                    <checkbox ng-model="vm.optCareRecord.inOperWay" ng-true-value="2" ng-false-value="0">平车</checkbox>
+                    <checkbox ng-model="vm.optCareRecord.inOperWay" ng-true-value="3" ng-false-value="0">轮椅</checkbox>
+                    <checkbox ng-model="vm.optCareRecord.inOperWay" ng-true-value="4" ng-false-value="0">抱入</checkbox>
+                </td>
+            </tr>
+            <tr>
+                <td width="2%">术中</td>
+                <td>
+                    <span>体位：</span>
+                    <checkbox ng-model="optbodys[0]" ng-true-value="1" ng-false-value="0">仰卧位</checkbox>
+                    <checkbox ng-model="optbodys[1]" ng-true-value="1" ng-false-value="0">俯卧位</checkbox>
+                    <checkbox ng-model="optbodys[2]" ng-true-value="1" ng-false-value="0">左侧卧位</checkbox>
+                    <checkbox ng-model="optbodys[3]" ng-true-value="1" ng-false-value="0">右侧卧位</checkbox>
+                    <checkbox ng-model="optbodys[4]" ng-true-value="1" ng-false-value="0">截石位</checkbox>
+                    <checkbox ng-model="optbodys[5]" ng-true-value="1" ng-false-value="0" ng-click="vm.optCareRecord.optBodyOther = ''">其他：</checkbox>
+                    <input type="text" flex class="noborder3" maxlength="25" ng-model="vm.optCareRecord.optBodyOther" ng-value="vm.optCareRecord.optBodyOther"><br>
+                    <span>高频电刀：</span>
+                    <checkbox ng-model="vm.optCareRecord.elecKnife" ng-true-value="1" ng-false-value="0">无</checkbox>
+                    <checkbox ng-model="vm.optCareRecord.elecKnife" ng-true-value="2" ng-false-value="0">有</checkbox>
+                    <span>负极板位置：</span>
+                    <checkbox ng-model="negativePosition[0]" ng-true-value="1" ng-false-value="0">臀部</checkbox>
+                    <checkbox ng-model="negativePosition[1]" ng-true-value="1" ng-false-value="0">大腿</checkbox>
+                    <checkbox ng-model="negativePosition[2]" ng-true-value="1" ng-false-value="0">小腿</checkbox>
+                    <checkbox ng-model="negativePosition[3]" ng-true-value="1" ng-false-value="0">上臂</checkbox>
+                    <checkbox ng-model="negativePosition[4]" ng-true-value="1" ng-false-value="0" ng-click="vm.optCareRecord.negativePositionOther = ''">其他：</checkbox>
+                    <input type="text" flex class="noborder3" maxlength="25" ng-model="vm.optCareRecord.negativePositionOther" ng-value="vm.optCareRecord.negativePositionOther"><br>
+                    <span>体位支持用物：</span>
+                    <checkbox ng-model="vm.optCareRecord.supportMaterialFlag" ng-true-value="1" ng-false-value="0" ng-click="supportMaterial = [0,0,0,0,0,0,0,0,0];vm.optCareRecord.supportMaterialOther = ''">无</checkbox>
+                    <checkbox ng-model="supportMaterial[0]" ng-true-value="1" ng-false-value="0">砂袋</checkbox>
+                    <checkbox ng-model="supportMaterial[1]" ng-true-value="1" ng-false-value="0">枕头</checkbox>
+                    <checkbox ng-model="supportMaterial[2]" ng-true-value="1" ng-false-value="0">手托</checkbox>
+                    <checkbox ng-model="supportMaterial[3]" ng-true-value="1" ng-false-value="0">头圈</checkbox>
+                    <checkbox ng-model="supportMaterial[4]" ng-true-value="1" ng-false-value="0">头架</checkbox>
+                    <checkbox ng-model="supportMaterial[5]" ng-true-value="1" ng-false-value="0">臂部付托</checkbox>
+                    <checkbox ng-model="supportMaterial[6]" ng-true-value="1" ng-false-value="0">模型托</checkbox>
+                    <checkbox ng-model="supportMaterial[7]" ng-true-value="1" ng-false-value="0">支腿架</checkbox>
+                    <checkbox ng-model="supportMaterial[8]" ng-true-value="1" ng-false-value="0" ng-click="vm.optCareRecord.supportMaterialOther = ''">其他：</checkbox>
+                    <input type="text" flex class="noborder3" maxlength="25" ng-model="vm.optCareRecord.supportMaterialOther" ng-value="vm.optCareRecord.supportMaterialOther">
+                    <span>止血带：</span>
+                    <checkbox ng-model="vm.optCareRecord.tourniquet" ng-true-value="1" ng-false-value="0">无</checkbox>
+                    <checkbox ng-model="vm.optCareRecord.tourniquet" ng-true-value="2" ng-false-value="0">有</checkbox>
+                    <span>部位：</span>
+                    <input type="text" flex class="noborder3" maxlength="25" ng-model="vm.optCareRecord.tourniquetPart" ng-value="vm.optCareRecord.tourniquetPart" style="width: 80px;">
+                    <span>压力：</span>
+                    <input type="text" flex class="noborder3" maxlength="25" ng-model="vm.optCareRecord.tourniquetPress" ng-value="vm.optCareRecord.tourniquetPress" style="max-width: 40px;min-width: 40px;">mmHg<br>
+                    <span>体内植入物：</span>
+                    <checkbox ng-model="vm.optCareRecord.implants" ng-true-value="1" ng-false-value="0">无</checkbox>
+                    <checkbox ng-model="vm.optCareRecord.implants" ng-true-value="2" ng-false-value="0">有</checkbox>
+                    <span>标本：</span>
+                    <checkbox ng-model="vm.optCareRecord.specimen" ng-true-value="1" ng-false-value="0">无</checkbox>
+                    <checkbox ng-model="vm.optCareRecord.specimen" ng-true-value="2" ng-false-value="0">有</checkbox>
+                    <span>送检：</span>
+                    <checkbox ng-model="vm.optCareRecord.inspection" ng-true-value="1" ng-false-value="0">普通</checkbox>
+                    <checkbox ng-model="vm.optCareRecord.inspection" ng-true-value="2" ng-false-value="0">快递</checkbox><br><br>
+                    <span>备注：</span>
+                    <input type="text" flex class="noborder3" maxlength="25" ng-model="vm.optCareRecord.remark" ng-value="vm.optCareRecord.remark" style="width: 80%;">
+                </td>
+                <td width="12%">
+                    <span>交班者</span><br>
+                    <oi-select class="noborder3 sign" ng-class="{true: 'signature', false: 'unsignature'}[hasSig]" ng-model="vm.optCareRecord.midShiftChanged" oi-options="i.userName as i.name for i in nurseList | limitTo: 100" oi-select-options="{ listFilter: 'oiSelectAscSort:[\'username\', \'name\', \'pinYin\']'}" style="width: 80%!important;"></oi-select>
+                </td>
+                <td width="12%">
+                    <span>接班者</span><br>
+                    <oi-select class="noborder3 sign" ng-class="{true: 'signature', false: 'unsignature'}[hasSig]" ng-model="vm.optCareRecord.midShiftChange" oi-options="i.userName as i.name for i in nurseList | limitTo: 100" oi-select-options="{ listFilter: 'oiSelectAscSort:[\'username\', \'name\', \'pinYin\']'}" style="width: 80%!important;"></oi-select>
+                </td>
+            </tr>
+            <tr>
+                <td rowspan="2" width="2%">术毕</td>
+                <td>
+                    <span>手术名称：<a flex>{{vm.optCareRecord.operationName}}</a></span><br>
+                    入<checkbox ng-model="vm.optCareRecord.leaveTo" ng-true-value="2" ng-false-value="0">PACU</checkbox>
+                    <checkbox ng-model="vm.optCareRecord.leaveTo" ng-true-value="3" ng-false-value="0">ICU</checkbox>&nbsp;&nbsp;&nbsp;&nbsp;
+                    时间：<input datetimepicker="" class='noborder3 calendar sign' name="signTimes" id="datatime" dateID="signTimes-times" ng-model="vm.optCareRecord.outOperRoomTime"></input><br>
+                    <span>意识评估：</span>
+                    <checkbox ng-model="vm.optCareRecord.conscious1" ng-true-value="1" ng-false-value="0">清醒</checkbox>
+                    <checkbox ng-model="vm.optCareRecord.conscious1" ng-true-value="2" ng-false-value="0">嗜睡</checkbox>
+                    <checkbox ng-model="vm.optCareRecord.conscious1" ng-true-value="3" ng-false-value="0">模糊</checkbox>
+                    <checkbox ng-model="vm.optCareRecord.conscious1" ng-true-value="4" ng-false-value="0">昏睡</checkbox>
+                    <checkbox ng-model="vm.optCareRecord.conscious1" ng-true-value="5" ng-false-value="0">昏迷</checkbox>
+                    <checkbox ng-model="vm.optCareRecord.conscious1" ng-true-value="6" ng-false-value="0">麻醉状态</checkbox>
+                    <checkbox ng-model="vm.optCareRecord.conscious1" ng-true-value="7" ng-false-value="0" ng-click="vm.optCareRecord.consciousOther1 = ''">其他：</checkbox>
+                    <input type="text" flex class="noborder3" maxlength="25" ng-model="vm.optCareRecord.consciousOther1" ng-value="vm.optCareRecord.consciousOther1"><br>
+                    <span>留置导管：</span>
+                    <checkbox ng-model="vm.optCareRecord.indwellPipe1" ng-true-value="1" ng-false-value="0" ng-click="indwellPipeDetail1 = [0,0,0,0,0,0,0];vm.optCareRecord.indwellPipeOther1 = ''">无</checkbox>
+                    <checkbox ng-model="indwellPipeDetail1[0]" ng-true-value="1" ng-false-value="0">气管导管</checkbox>
+                    <checkbox ng-model="indwellPipeDetail1[1]" ng-true-value="1" ng-false-value="0">伤口引流管</checkbox>
+                    <checkbox ng-model="indwellPipeDetail1[2]" ng-true-value="1" ng-false-value="0">尿管</checkbox>
+                    <checkbox ng-model="indwellPipeDetail1[3]" ng-true-value="1" ng-false-value="0">胃管</checkbox>
+                    <checkbox ng-model="indwellPipeDetail1[4]" ng-true-value="1" ng-false-value="0">T管</checkbox>
+                    <checkbox ng-model="indwellPipeDetail1[5]" ng-true-value="1" ng-false-value="0">腹腔引流管</checkbox>
+                    <checkbox ng-model="indwellPipeDetail1[6]" ng-true-value="1" ng-false-value="0" ng-click="vm.optCareRecord.indwellPipeOther1 = ''">其他：</checkbox>
+                    <input type="text" flex class="noborder3" maxlength="25" ng-model="vm.optCareRecord.indwellPipeOther1" ng-value="vm.optCareRecord.indwellPipeOther1"><br>
+                    <span>病历：</span>
+                    <checkbox ng-model="vm.optCareRecord.medicalRec1" ng-true-value="1" ng-false-value="0">无</checkbox>
+                    <checkbox ng-model="vm.optCareRecord.medicalRec1" ng-true-value="2" ng-false-value="0">有</checkbox>
+                    <span>影像学资料：</span>
+                    <checkbox ng-model="vm.optCareRecord.videography1" ng-true-value="1" ng-false-value="0">无</checkbox>
+                    <checkbox ng-model="vm.optCareRecord.videography1" ng-true-value="2" ng-false-value="0">有</checkbox>
+                    <span>静脉输液：</span>
+                    <checkbox ng-model="vm.optCareRecord.infusion1" ng-true-value="1" ng-false-value="0">无</checkbox>
+                    <checkbox ng-model="vm.optCareRecord.infusion1" ng-true-value="2" ng-false-value="0">有</checkbox><br>
+                    <span>受压皮肤：</span>
+                    <checkbox ng-model="vm.optCareRecord.pressSkin1" ng-true-value="1" ng-false-value="0">完整</checkbox>
+                    <checkbox ng-model="vm.optCareRecord.pressSkin1" ng-true-value="2" ng-false-value="0">不完整</checkbox>
+                    <input type="text" flex class="noborder3" maxlength="25" ng-model="vm.optCareRecord.pressSkinDetail1" ng-value="vm.optCareRecord.pressSkinDetail1" style="width: 100px;">
+                    <span>带入物品：</span>
+                    <checkbox ng-model="vm.optCareRecord.bringGoods1" ng-true-value="1" ng-false-value="0">无</checkbox>
+                    <checkbox ng-model="vm.optCareRecord.bringGoods1" ng-true-value="2" ng-false-value="0">有</checkbox>
+                    <input type="text" flex class="noborder3" maxlength="25" ng-model="vm.optCareRecord.bringGoodsDetail1" ng-value="vm.optCareRecord.bringGoodsDetail1" style="width: 90px;"><br>
+                    <span>带入血液：</span>
+                    <checkbox ng-model="vm.optCareRecord.bringBlood1" ng-true-value="1" ng-false-value="0">无</checkbox>
+                    <checkbox ng-model="vm.optCareRecord.bringBlood1" ng-true-value="2" ng-false-value="0">有</checkbox>
+                </td>
+                <td width="12%">
+                    <span>交班者</span><br>
+                    <oi-select class="noborder3 sign" ng-class="{true: 'signature', false: 'unsignature'}[hasSig]" ng-model="vm.optCareRecord.postShiftChanged1" oi-options="i.userName as i.name for i in nurseList | limitTo: 100" oi-select-options="{ listFilter: 'oiSelectAscSort:[\'username\', \'name\', \'pinYin\']'}" style="width: 80%!important;"></oi-select>
+                </td>
+                <td width="12%">
+                    <span>接班者</span><br>
+                    <oi-select class="noborder3 sign" ng-class="{true: 'signature', false: 'unsignature'}[hasSig]" ng-model="vm.optCareRecord.postShiftChange1" oi-options="i.userName as i.name for i in nurseList | limitTo: 100" oi-select-options="{ listFilter: 'oiSelectAscSort:[\'username\', \'name\', \'pinYin\']'}" style="width: 80%!important;"></oi-select>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span style="padding-right: 100px;">回病房</span>
+                    时间：<input datetimepicker="" class='noborder3 calendar sign' name="backWardTime" id="datatime" dateID="backWardTime-times" ng-model="vm.optCareRecord.backWardTime"></input><br>
+                    <span>意识评估：</span>
+                    <checkbox ng-model="vm.optCareRecord.conscious2" ng-true-value="1" ng-false-value="0">清醒</checkbox>
+                    <checkbox ng-model="vm.optCareRecord.conscious2" ng-true-value="2" ng-false-value="0">嗜睡</checkbox>
+                    <checkbox ng-model="vm.optCareRecord.conscious2" ng-true-value="3" ng-false-value="0">模糊</checkbox>
+                    <checkbox ng-model="vm.optCareRecord.conscious2" ng-true-value="4" ng-false-value="0">昏睡</checkbox>
+                    <checkbox ng-model="vm.optCareRecord.conscious2" ng-true-value="5" ng-false-value="0">昏迷</checkbox>
+                    <checkbox ng-model="vm.optCareRecord.conscious2" ng-true-value="6" ng-false-value="0">麻醉状态</checkbox>
+                    <checkbox ng-model="vm.optCareRecord.conscious2" ng-true-value="7" ng-false-value="0" ng-click="vm.optCareRecord.consciousOther2 = ''">其他：</checkbox>
+                    <input type="text" flex class="noborder3" maxlength="25" ng-model="vm.optCareRecord.consciousOther2" ng-value="vm.optCareRecord.consciousOther2"><br>
+                    <span>留置导管：</span>
+                    <checkbox ng-model="vm.optCareRecord.indwellPipe2" ng-true-value="1" ng-false-value="0" ng-click="indwellPipeDetail2 = [0,0,0,0,0,0,0];vm.optCareRecord.indwellPipeOther2 = ''">无</checkbox>
+                    <checkbox ng-model="indwellPipeDetail2[0]" ng-true-value="1" ng-false-value="0">气管导管</checkbox>
+                    <checkbox ng-model="indwellPipeDetail2[1]" ng-true-value="1" ng-false-value="0">伤口引流管</checkbox>
+                    <checkbox ng-model="indwellPipeDetail2[2]" ng-true-value="1" ng-false-value="0">尿管</checkbox>
+                    <checkbox ng-model="indwellPipeDetail2[3]" ng-true-value="1" ng-false-value="0">胃管</checkbox>
+                    <checkbox ng-model="indwellPipeDetail2[4]" ng-true-value="1" ng-false-value="0">T管</checkbox>
+                    <checkbox ng-model="indwellPipeDetail2[5]" ng-true-value="1" ng-false-value="0">腹腔引流管</checkbox>
+                    <checkbox ng-model="indwellPipeDetail2[6]" ng-true-value="1" ng-false-value="0" ng-click="vm.optCareRecord.indwellPipeOther2 = ''">其他：</checkbox>
+                    <input type="text" flex class="noborder3" maxlength="25" ng-model="vm.optCareRecord.indwellPipeOther2" ng-value="vm.optCareRecord.indwellPipeOther2"><br>
+                    <span>病历：</span>
+                    <checkbox ng-model="vm.optCareRecord.medicalRec2" ng-true-value="1" ng-false-value="0">无</checkbox>
+                    <checkbox ng-model="vm.optCareRecord.medicalRec2" ng-true-value="2" ng-false-value="0">有</checkbox>
+                    <span>影像学资料：</span>
+                    <checkbox ng-model="vm.optCareRecord.videography2" ng-true-value="1" ng-false-value="0">无</checkbox>
+                    <checkbox ng-model="vm.optCareRecord.videography2" ng-true-value="2" ng-false-value="0">有</checkbox>
+                    <span>静脉输液：</span>
+                    <checkbox ng-model="vm.optCareRecord.infusion2" ng-true-value="1" ng-false-value="0">无</checkbox>
+                    <checkbox ng-model="vm.optCareRecord.infusion2" ng-true-value="2" ng-false-value="0">有</checkbox><br>
+                    <span>受压皮肤：</span>
+                    <checkbox ng-model="vm.optCareRecord.pressSkin2" ng-true-value="1" ng-false-value="0">完整</checkbox>
+                    <checkbox ng-model="vm.optCareRecord.pressSkin2" ng-true-value="2" ng-false-value="0">不完整</checkbox>
+                    <input type="text" flex class="noborder3" maxlength="25" ng-model="vm.optCareRecord.pressSkinDetail2" ng-value="vm.optCareRecord.pressSkinDetail2" style="width: 100px;">
+                    <span>带入物品：</span>
+                    <checkbox ng-model="vm.optCareRecord.bringGoods2" ng-true-value="1" ng-false-value="0">无</checkbox>
+                    <checkbox ng-model="vm.optCareRecord.bringGoods2" ng-true-value="2" ng-false-value="0">有</checkbox>
+                    <input type="text" flex class="noborder3" maxlength="25" ng-model="vm.optCareRecord.bringGoodsDetail2" ng-value="vm.optCareRecord.bringGoodsDetail2" style="width: 90px;"><br>
+                    <span>带入血液：</span>
+                    <checkbox ng-model="vm.optCareRecord.bringBlood2" ng-true-value="1" ng-false-value="0">无</checkbox>
+                    <checkbox ng-model="vm.optCareRecord.bringBlood2" ng-true-value="2" ng-false-value="0">有</checkbox>
+                </td>
+                <td width="12%">
+                    <span>交班者</span><br>
+                    <oi-select class="noborder3 sign" ng-class="{true: 'signature', false: 'unsignature'}[hasSig]" ng-model="vm.optCareRecord.postShiftChanged2" oi-options="i.userName as i.name for i in nurseList | limitTo: 100" oi-select-options="{ listFilter: 'oiSelectAscSort:[\'username\', \'name\', \'pinYin\']'}" style="width: 80%!important;"></oi-select>
+                </td>
+                <td width="12%">
+                    <span>接班者</span><br>
+                    <oi-select class="noborder3 sign" ng-class="{true: 'signature', false: 'unsignature'}[hasSig]" ng-model="vm.optCareRecord.postShiftChange2" oi-options="i.userName as i.name for i in nurseList | limitTo: 100" oi-select-options="{ listFilter: 'oiSelectAscSort:[\'username\', \'name\', \'pinYin\']'}" style="width: 80%!important;"></oi-select>
+                </td>
+            </tr>
+        </table>
+    </div>
+</div>

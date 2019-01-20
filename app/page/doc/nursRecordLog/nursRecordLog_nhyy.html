@@ -1,0 +1,417 @@
+<div id="print-region">
+    <div class="page-print" ng-class="{true:'end-state'}[vm.docVisitEvaluate.processState == 'END' && !saveActive || setting.readonly]" id="nursRecordLogNhyy">
+        <header layout="column" layout-align="center center">
+            <h3>南华医院手术室病人访视评估表</h3>
+        </header>
+        <div class="form-group" layout layout-wrap="wrap" layout-align="space-between end">
+            <span >姓名：<a flex>{{vm.regOpt.name}}</a></span>&nbsp;
+            <span >性别：<a flex>{{vm.regOpt.sex}}</a></span>&nbsp;
+            <span >年龄：<a flex>{{vm.regOpt.age}}</a></span>&nbsp;
+            <span >科室：<a flex>{{vm.regOpt.deptName}}</a></span>&nbsp;
+            <span >床号：<a flex>{{vm.regOpt.bed}}</a></span>&nbsp;
+            <span >住院号：<a flex>{{vm.regOpt.hid}}</a></span>&nbsp;
+            <span>手术日期：<a flex>{{vm.regOpt.operaDate | date: 'yyyy - MM - dd'}}</a></span>
+        </div>
+        <div class="form-group" layout layout-wrap="wrap" layout-align="space-between end">
+            <span layout flex>术前诊断：<a flex>{{vm.regOpt.diagnosisName}}</a></span>
+        </div>
+        <div class="form-group" layout layout-wrap="wrap" layout-align="space-between end">
+            <span layout flex>拟行手术：<a flex>{{vm.regOpt.designedOptName}}</a></span>
+            <span layout flex>拟麻醉方式：<a flex>{{vm.regOpt.designedAnaesMethodName}}</a></span>
+        </div>
+        <div class="form-group" layout layout-wrap="wrap" layout-align="space-between end">
+            <span>拟洗手护士：<a flex>{{vm.designedInstrnurse}}</a></span>
+            <span>拟巡回护士：<a flex>{{vm.designedCircunurses}}</a></span>
+            <span>访视护士：</span>
+            <oi-select class="noborder3 sign" ng-model="vm.docVisitEvaluate.visitNurse" oi-options="i.userName as i.name for i in nurseList | limitTo: 100" oi-select-options="{ listFilter: 'oiSelectAscSort:[\'username\', \'name\', \'pinYin\']'}"></oi-select>
+            <span>访视日期：</span>
+            <input datetimepicker="" name="visitDate" dateID="visitDate-times" ng-model="vm.docVisitEvaluate.visitDate" ng-value="vm.docVisitEvaluate.visitDate" timepicker="false" class="noborder3 calendar sign" format="Y-m-d" id="datatime"></input>
+        </div>
+        <div layout class="tab-warp">
+            <div layout layout-align="center center" class="tit-h text-center">
+                <span>全身评估</span>
+            </div>
+            <div flex>
+                <div layout style="padding: 5px;">
+                    <div flex>
+                        <div class="form-group" layout>
+                            <span>体重</span>
+                            <input type="number" flex class="noborder2" ng-model="vm.docVisitEvaluate.weight" ng-value="vm.docVisitEvaluate.weight">Kg&nbsp;&nbsp;&nbsp;
+                            <span>身高：</span>
+                            <input type="number" flex class="noborder2" ng-model="vm.docVisitEvaluate.height" ng-value="vm.docVisitEvaluate.height">cm&nbsp;&nbsp;&nbsp;
+                            <span>血压：</span>
+                            <input type="number" flex class="noborder2" ng-model="vm.docVisitEvaluate.bpDias" ng-value="vm.docVisitEvaluate.bpDias">/<input type="number" flex class="noborder2" ng-model="vm.docVisitEvaluate.bpSys" ng-value="vm.docVisitEvaluate.bpSys">mmHg&nbsp;&nbsp;&nbsp;
+                            <span>心率：</span>
+                            <input type="number" flex class="noborder2" ng-model="vm.docVisitEvaluate.hr" ng-value="vm.docVisitEvaluate.hr">次/分&nbsp;&nbsp;&nbsp;
+                            <span>体温：</span>
+                            <input type="number" flex class="noborder2" ng-model="vm.docVisitEvaluate.temp" ng-value="vm.docVisitEvaluate.temp">℃
+                        </div>
+                        <div class="form-group" layout>
+                            <span>意识状态：</span>
+                            <checkbox ng-model="vm.docVisitEvaluate.conscious" ng-true-value="1" ng-false-value="0">清醒</checkbox>
+                            <checkbox ng-model="vm.docVisitEvaluate.conscious" ng-true-value="2" ng-false-value="0">嗜睡</checkbox>
+                            <checkbox ng-model="vm.docVisitEvaluate.conscious" ng-true-value="3" ng-false-value="0">躁动</checkbox>
+                            <checkbox ng-model="vm.docVisitEvaluate.conscious" ng-true-value="4" ng-false-value="0">昏迷智障</checkbox>
+                            <span>其他：</span>
+                            <input type="text" flex class="text-input" maxlength="25" ng-model="vm.docVisitEvaluate.consciousOther" ng-value="vm.docVisitEvaluate.consciousOther">
+                        </div>
+                        <div class="form-group" layout>
+                            <span>术前心理：</span>
+                            <checkbox ng-model="vm.docVisitEvaluate.preMental" ng-true-value="1" ng-false-value="0">平静</checkbox>
+                            <checkbox ng-model="vm.docVisitEvaluate.preMental" ng-true-value="2" ng-false-value="0">紧张</checkbox>
+                            <checkbox ng-model="vm.docVisitEvaluate.preMental" ng-true-value="3" ng-false-value="0">焦虑</checkbox>
+                            <checkbox ng-model="vm.docVisitEvaluate.preMental" ng-true-value="4" ng-false-value="0">其他</checkbox>
+                            <input type="text" flex class="text-input" maxlength="25" ng-model="vm.docVisitEvaluate.preMentalOther" ng-value="vm.docVisitEvaluate.preMentalOther">
+                        </div>
+                        <div class="form-group" layout>
+                            <span>睡眠质量：</span>
+                            <checkbox ng-model="vm.docVisitEvaluate.sleepQuality" ng-true-value="1" ng-false-value="0" ng-click="sleepQualityBadReason = [0, 0]">好</checkbox>
+                            <checkbox ng-model="vm.docVisitEvaluate.sleepQuality" ng-true-value="2" ng-false-value="0" ng-click="sleepQualityBadReason = [0, 0]">一般</checkbox>
+                            <checkbox ng-model="vm.docVisitEvaluate.sleepQuality" ng-true-value="3" ng-false-value="0">差</checkbox>
+                            <checkbox ng-model="sleepQualityBadReason[0]" ng-true-value="1" ng-false-value="0">与疾病疼痛有关</checkbox>
+                            <checkbox ng-model="sleepQualityBadReason[1]" ng-true-value="1" ng-false-value="0">与环境改变有关</checkbox>
+                        </div>
+                        <div class="form-group" layout>
+                            <span>沟通障碍：</span>
+                            <checkbox ng-model="vm.docVisitEvaluate.communiBarrier" ng-true-value="1" ng-false-value="0">否</checkbox>
+                            <checkbox ng-model="vm.docVisitEvaluate.communiBarrier" ng-true-value="2" ng-false-value="0">是</checkbox>
+                            <span>使用语言：</span>
+                            <input type="text" flex class="text-input" maxlength="25" ng-model="vm.docVisitEvaluate.useLanguage" ng-value="vm.docVisitEvaluate.useLanguage">
+                            <span>听力缺陷：</span>
+                            <input type="text" flex class="text-input" maxlength="25" ng-model="vm.docVisitEvaluate.hearDefect" ng-value="vm.docVisitEvaluate.hearDefect">
+                            <span>其他：</span>
+                            <input type="text" flex class="text-input" maxlength="25" ng-model="vm.docVisitEvaluate.communiBarrierOther" ng-value="vm.docVisitEvaluate.communiBarrierOther">
+                        </div>
+                        <div class="form-group" layout>
+                            <span>视力障碍：</span>
+                            <checkbox ng-model="vm.docVisitEvaluate.visionDefect" ng-true-value="1" ng-false-value="0" ng-click="visionDefectDetail = [0, 0]">否</checkbox>
+                            <checkbox ng-model="vm.docVisitEvaluate.visionDefect" ng-true-value="2" ng-false-value="0">是</checkbox>
+                            (<checkbox ng-model="visionDefectDetail[0]" ng-true-value="1" ng-false-value="0">左</checkbox>
+                            <checkbox ng-model="visionDefectDetail[1]" ng-true-value="1" ng-false-value="0">右</checkbox>)
+                        </div>
+                        <div class="form-group" layout>
+                            <span>身体状况：</span>
+                            <checkbox ng-model="vm.docVisitEvaluate.bodyStatus" ng-true-value="1" ng-false-value="0">良好</checkbox>
+                            <checkbox ng-model="vm.docVisitEvaluate.bodyStatus" ng-true-value="2" ng-false-value="0">一般</checkbox>
+                            <checkbox ng-model="vm.docVisitEvaluate.bodyStatus" ng-true-value="3" ng-false-value="0">虚弱</checkbox>
+                        </div>
+                        <div class="form-group" layout>
+                            <span>体格发育：</span>
+                            <checkbox ng-model="vm.docVisitEvaluate.bodyDevelop" ng-true-value="1" ng-false-value="0" ng-click="bodyAbnormalDetail = [0, 0, 0, 0, 0, 0, 0, 0, 0];vm.docVisitEvaluate.bodyAbnormalOther = ''">正常</checkbox><br>
+                            <checkbox ng-model="vm.docVisitEvaluate.bodyDevelop" ng-true-value="2" ng-false-value="0">异常：</checkbox>
+                            <checkbox ng-model="bodyAbnormalDetail[0]" ng-true-value="1" ng-false-value="0">颈椎</checkbox>
+                            <checkbox ng-model="bodyAbnormalDetail[1]" ng-true-value="1" ng-false-value="0">脊柱</checkbox>
+                            <checkbox ng-model="bodyAbnormalDetail[2]" ng-true-value="1" ng-false-value="0">上肢</checkbox>
+                            (<checkbox ng-model="bodyAbnormalDetail[3]" ng-true-value="1" ng-false-value="0">左</checkbox>
+                            <checkbox ng-model="bodyAbnormalDetail[4]" ng-true-value="1" ng-false-value="0">右</checkbox>)
+                            <checkbox ng-model="bodyAbnormalDetail[5]" ng-true-value="1" ng-false-value="0">下肢</checkbox>
+                            (<checkbox ng-model="bodyAbnormalDetail[6]" ng-true-value="1" ng-false-value="0">左</checkbox>
+                            <checkbox ng-model="bodyAbnormalDetail[7]" ng-true-value="1" ng-false-value="0">右</checkbox>)
+                            <checkbox ng-model="bodyAbnormalDetail[8]" ng-true-value="1" ng-false-value="0" ng-click="vm.docVisitEvaluate.bodyAbnormalOther = ''">其他：</checkbox>
+                            <input type="text" flex class="text-input" maxlength="25" ng-model="vm.docVisitEvaluate.bodyAbnormalOther" ng-value="vm.docVisitEvaluate.bodyAbnormalOther">
+                        </div>
+                        <div class="form-group" layout>
+                            <span>肢体感觉：</span>
+                            <checkbox ng-model="vm.docVisitEvaluate.limbFeel" ng-true-value="1" ng-false-value="0" ng-click="vm.docVisitEvaluate.limbAbnormalParts = '';vm.docVisitEvaluate.limbAbnormalNature = ''">正常</checkbox>
+                            <checkbox ng-model="vm.docVisitEvaluate.limbFeel" ng-true-value="2" ng-false-value="0">异常</checkbox>
+                            <span>部位</span>
+                            <input type="text" flex class="text-input" maxlength="25" ng-model="vm.docVisitEvaluate.limbAbnormalParts" ng-value="vm.docVisitEvaluate.limbAbnormalParts">
+                            <span>性质</span>
+                            <input type="text" flex class="text-input" maxlength="25" ng-model="vm.docVisitEvaluate.limbAbnormalNature" ng-value="vm.docVisitEvaluate.limbAbnormalNature">
+                        </div>
+                        <div class="form-group" layout>
+                            <span>血管情况：</span>
+                            <checkbox ng-model="vm.docVisitEvaluate.arteryState" ng-true-value="1" ng-false-value="0">充盈</checkbox>
+                            <checkbox ng-model="vm.docVisitEvaluate.arteryState" ng-true-value="2" ng-false-value="0">较硬</checkbox>
+                            <checkbox ng-model="vm.docVisitEvaluate.arteryState" ng-true-value="3" ng-false-value="0">较细</checkbox>
+                        </div>
+                        <div class="form-group" layout="column">
+                            <span>皮肤黏膜：<checkbox ng-model="vm.docVisitEvaluate.skinMucosa" ng-true-value="1" ng-false-value="0" ng-click="vm.docVisitEvaluate.skinAbnormalParts = '';vm.docVisitEvaluate.skinAbnormalNature = ''">正常</checkbox></span>
+                            <span class="indent1"><checkbox ng-model="vm.docVisitEvaluate.skinMucosa" ng-true-value="2" ng-false-value="0">异常</checkbox></span>
+                            <span class="indent1">部位<input type="text" class="text-input" maxlength="25" ng-model="vm.docVisitEvaluate.skinAbnormalParts" ng-value="vm.docVisitEvaluate.skinAbnormalParts"></span>
+                            <span class="indent1">性质<input type="text" class="text-input" maxlength="25" ng-model="vm.docVisitEvaluate.skinAbnormalNature" ng-value="vm.docVisitEvaluate.skinAbnormalNature"></span>
+                        </div>
+                        <div class="form-group">
+                            <span>压疮风险：</span>
+                            <checkbox ng-model="vm.docVisitEvaluate.pressureUlcerRisk" ng-true-value="1" ng-false-value="0">有</checkbox>
+                            <checkbox ng-model="vm.docVisitEvaluate.pressureUlcerRisk" ng-true-value="2" ng-false-value="0" ng-click="vm.docVisitEvaluate.pressureUlcerParts = ''">无</checkbox>
+                            <span>部位</span>
+                            <input type="text" flex class="text-input" maxlength="25" ng-model="vm.docVisitEvaluate.pressureUlcerParts" ng-value="vm.docVisitEvaluate.pressureUlcerParts">
+                        </div>
+                        <div class="form-group" layout>
+                            <span>切口等级：</span>
+                            <checkbox ng-model="vm.docVisitEvaluate.cutLevel" ng-true-value="1" ng-false-value="0">Ⅰ</checkbox>
+                            <checkbox ng-model="vm.docVisitEvaluate.cutLevel" ng-true-value="2" ng-false-value="0">Ⅱ</checkbox>
+                            <checkbox ng-model="vm.docVisitEvaluate.cutLevel" ng-true-value="3" ng-false-value="0">Ⅲ</checkbox>
+                            <checkbox ng-model="vm.docVisitEvaluate.cutLevel" ng-true-value="4" ng-false-value="0">Ⅳ</checkbox>
+                        </div>
+                        <div class="form-group" layout>
+                            <span>过 敏 史 ：</span>
+                            <checkbox ng-model="vm.docVisitEvaluate.allergic" ng-true-value="1" ng-false-value="0" ng-click="allergicDetail = [0, 0, 0];vm.docVisitEvaluate.allergicMedical = '';vm.docVisitEvaluate.allergicFood = '';vm.docVisitEvaluate.allergicOther = ''">无</checkbox>
+                        </div>
+                        <div class="form-group">
+                            <div class="indent1">
+                                <checkbox ng-model="vm.docVisitEvaluate.allergic" ng-true-value="2" ng-false-value="0">有：</checkbox>
+                                <checkbox ng-model="allergicDetail[0]" ng-true-value="1" ng-false-value="0">药物</checkbox>
+                                <input type="text" class="noborder3" ng-model="vm.docVisitEvaluate.allergicMedical" ng-value="vm.docVisitEvaluate.allergicMedical">
+                                <checkbox ng-model="allergicDetail[1]" ng-true-value="1" ng-false-value="0">食物</checkbox>
+                                <input type="text" class="text-input" ng-model="vm.docVisitEvaluate.allergicFood" ng-value="vm.docVisitEvaluate.allergicFood">
+                                <checkbox ng-model="allergicDetail[2]" ng-true-value="1" ng-false-value="0">其他</checkbox>
+                                <input type="text" class="text-input" ng-model="vm.docVisitEvaluate.allergicOther" ng-value="vm.docVisitEvaluate.allergicOther">
+                            </div>
+                        </div>
+                        <div class="form-group" layout>
+                            <span>感染情况：</span>
+                            <checkbox ng-model="vm.docVisitEvaluate.infection" ng-true-value="1" ng-false-value="0" ng-click="infectionDetail = [0,0,0,0,0,0,0];vm.docVisitEvaluate.infectionOther = ''">无</checkbox>
+                            <checkbox ng-model="infectionDetail[0]" ng-true-value="1" ng-false-value="0">HIV</checkbox>
+                            <checkbox ng-model="infectionDetail[1]" ng-true-value="1" ng-false-value="0">HBV</checkbox>
+                            <checkbox ng-model="infectionDetail[2]" ng-true-value="1" ng-false-value="0">HCV</checkbox>
+                            <checkbox ng-model="infectionDetail[3]" ng-true-value="1" ng-false-value="0">梅毒</checkbox>
+                            <checkbox ng-model="infectionDetail[4]" ng-true-value="1" ng-false-value="0">TB</checkbox>
+                            <checkbox ng-model="infectionDetail[5]" ng-true-value="1" ng-false-value="0">绿脓杆菌</checkbox>
+                            <checkbox ng-model="infectionDetail[6]" ng-true-value="1" ng-false-value="0" ng-click="vm.docVisitEvaluate.infectionOther = ''">其他</checkbox>
+                            <input type="text" class="text-input" ng-model="vm.docVisitEvaluate.infectionOther" ng-value="vm.docVisitEvaluate.infectionOther">
+                        </div>
+                        <div class="form-group" layout>
+                            <span>既往病史：</span>
+                            <checkbox ng-model="vm.docVisitEvaluate.medicalHis" ng-true-value="1" ng-false-value="0" ng-click="medicalHisDetail = [0,0,0,0,0];vm.docVisitEvaluate.medicalHisOther = ''">无</checkbox>
+                            <checkbox ng-model="medicalHisDetail[0]" ng-true-value="1" ng-false-value="0">心血管疾病</checkbox>
+                            <checkbox ng-model="medicalHisDetail[1]" ng-true-value="1" ng-false-value="0">脑血管疾病</checkbox>
+                            <checkbox ng-model="medicalHisDetail[2]" ng-true-value="1" ng-false-value="0">高血压</checkbox>
+                            <checkbox ng-model="medicalHisDetail[3]" ng-true-value="1" ng-false-value="0">糖尿病</checkbox>
+                            <checkbox ng-model="medicalHisDetail[4]" ng-true-value="1" ng-false-value="0" ng-click="vm.docVisitEvaluate.medicalHisOther = ''">其他</checkbox>
+                            <input type="text" class="text-input" ng-model="vm.docVisitEvaluate.medicalHisOther" ng-value="vm.docVisitEvaluate.medicalHisOther">
+                        </div>
+                        <div class="form-group">
+                            <span>手&nbsp;术&nbsp;史&nbsp;：</span>
+                            <checkbox ng-model="vm.docVisitEvaluate.operHis" ng-true-value="1" ng-false-value="0" ng-click="vm.docVisitEvaluate.operHisDetail = ''">无</checkbox>
+                            <checkbox ng-model="vm.docVisitEvaluate.operHis" ng-true-value="2" ng-false-value="0">有</checkbox>
+                            <input type="text" flex class="noborder3" ng-model="vm.docVisitEvaluate.operHisDetail" ng-value="vm.docVisitEvaluate.operHisDetail">
+                        </div>
+                        <div class="form-group" layout>
+                            <span>植&nbsp;入&nbsp;史&nbsp;：</span>
+                            <checkbox ng-model="vm.docVisitEvaluate.implantHis" ng-true-value="1" ng-false-value="2" ng-click="implantHisDetail = [0,0,0,0];vm.docVisitEvaluate.implantHisOther = ''">无</checkbox>
+                            <checkbox ng-model="implantHisDetail[0]" ng-true-value="1" ng-false-value="0">耳蜗植入物</checkbox>
+                            <checkbox ng-model="implantHisDetail[1]" ng-true-value="1" ng-false-value="0">心脏起搏器</checkbox>
+                            <checkbox ng-model="implantHisDetail[2]" ng-true-value="1" ng-false-value="0">人工关节</checkbox>
+                            <checkbox ng-model="implantHisDetail[3]" ng-true-value="1" ng-false-value="0" ng-click="vm.docVisitEvaluate.implantHisOther = ''">其他</checkbox>
+                            <input type="text" flex class="noborder3" ng-model="vm.docVisitEvaluate.implantHisOther" ng-value="vm.docVisitEvaluate.implantHisOther">
+                        </div>
+                        <div class="form-group" layout>
+                            <span>术前检查：</span>
+                            <checkbox ng-model="preCheck[0]" ng-true-value="1" ng-false-value="0">血常规</checkbox>
+                            <checkbox ng-model="preCheck[1]" ng-true-value="1" ng-false-value="0">心电图</checkbox>
+                            <checkbox ng-model="preCheck[2]" ng-true-value="1" ng-false-value="0">血型</checkbox>
+                            <checkbox ng-model="preCheck[3]" ng-true-value="1" ng-false-value="0">配血</checkbox>
+                            <checkbox ng-model="preCheck[4]" ng-true-value="1" ng-false-value="0">出凝血时间</checkbox>
+                        </div>
+                        <div class="form-group">
+                            <span>已签知情同意书：</span>
+                            <checkbox ng-model="signedAgreeDoc[0]" ng-true-value="1" ng-false-value="0">手术</checkbox>
+                            <checkbox ng-model="signedAgreeDoc[1]" ng-true-value="1" ng-false-value="0">麻醉</checkbox>
+                            <checkbox ng-model="signedAgreeDoc[2]" ng-true-value="1" ng-false-value="0">输血</checkbox>
+                            <checkbox ng-model="signedAgreeDoc[3]" ng-true-value="1" ng-false-value="0" ng-click="vm.docVisitEvaluate.signedAgreeDocOther = ''">其他</checkbox>
+                            <input type="text" flex class="noborder3" ng-model="vm.docVisitEvaluate.signedAgreeDocOther" ng-value="vm.docVisitEvaluate.signedAgreeDocOther">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="page-print" ng-class="{true:'end-state'}[vm.optCareRecord.processState == 'END' && !saveActive || setting.readonly]" id="nursRecordLogNhyy">
+        <div layout class="tab-warp" style="border-bottom: none;">
+            <div layout layout-align="center center" class="tit-h text-center">
+                <span>社会评估</span>
+            </div>
+            <div flex style="padding: 5px;">
+                <div class="form-group" layout>
+                    <span>婚&nbsp;&nbsp;&nbsp;姻：</span>
+                    <checkbox ng-model="vm.docVisitEvaluate.marriage" ng-true-value="1" ng-false-value="0">未</checkbox>
+                    <checkbox ng-model="vm.docVisitEvaluate.marriage" ng-true-value="2" ng-false-value="0">已</checkbox>
+                </div>
+                <div class="form-group" layout>
+                    <span>病人支持群体：</span>
+                    <checkbox ng-model="vm.docVisitEvaluate.patSupportGroup" ng-true-value="1" ng-false-value="0">良好</checkbox>
+                    <checkbox ng-model="vm.docVisitEvaluate.patSupportGroup" ng-true-value="2" ng-false-value="0">不良</checkbox>
+                </div>
+                <div class="form-group" layout>
+                    <span>缴费方式：</span>
+                    <checkbox ng-model="vm.docVisitEvaluate.payMethod" ng-true-value="1" ng-false-value="0">医保</checkbox>
+                    <checkbox ng-model="vm.docVisitEvaluate.payMethod" ng-true-value="2" ng-false-value="0">农舍</checkbox>
+                    <checkbox ng-model="vm.docVisitEvaluate.payMethod" ng-true-value="3" ng-false-value="0">工伤医保</checkbox>
+                    <checkbox ng-model="vm.docVisitEvaluate.payMethod" ng-true-value="4" ng-false-value="0">自费</checkbox>
+                    <checkbox ng-model="vm.docVisitEvaluate.payMethod" ng-true-value="5" ng-false-value="0">公费</checkbox>
+                </div>
+            </div>
+        </div>
+        <div layout class="tab-warp" style="border-bottom: none;">
+            <div layout layout-align="center center" class="tit-h text-center">
+                <span>术前宣教</span>
+            </div>
+            <div flex style="padding: 5px;">
+                <div class="form-group" layout>
+                    <span>患者宣教：</span>
+                    <checkbox ng-model="patMission[0]" ng-true-value="1" ng-false-value="0">手术环境介绍</checkbox>
+                    <checkbox ng-model="patMission[1]" ng-true-value="1" ng-false-value="0">解释手术程序</checkbox>
+                    <checkbox ng-model="patMission[2]" ng-true-value="1" ng-false-value="0">交代禁食</checkbox>
+                    <checkbox ng-model="patMission[3]" ng-true-value="1" ng-false-value="0">禁饮时间</checkbox>
+                </div>
+                <div class="form-group" layout>
+                    <span>指导训练：</span>
+                    <checkbox ng-model="guideTrain[0]" ng-true-value="1" ng-false-value="0">麻醉体位</checkbox>
+                    <checkbox ng-model="guideTrain[1]" ng-true-value="1" ng-false-value="0">手术体位</checkbox>
+                    <checkbox ng-model="guideTrain[2]" ng-true-value="1" ng-false-value="0">手术相关知识</checkbox>
+                    <checkbox ng-model="guideTrain[3]" ng-true-value="1" ng-false-value="0">术中可能出现不适</checkbox>
+                </div>
+                <div class="form-group" layout>
+                    <span>由病房送手术室前请配合好以下事项：</span>
+                </div>
+                <div class="form-group" layout>
+                    <checkbox ng-model="prePrecautions[0]" ng-true-value="1" ng-false-value="0">请排尿、排便</checkbox>
+                    <checkbox ng-model="prePrecautions[1]" ng-true-value="1" ng-false-value="0">请勿穿内衣内裤</checkbox>
+                    <checkbox ng-model="prePrecautions[2]" ng-true-value="1" ng-false-value="0">请勿带饰品、贵重物品</checkbox>
+                    <checkbox ng-model="prePrecautions[3]" ng-true-value="1" ng-false-value="0">请除去假牙</checkbox>
+                </div>
+                <div class="form-group" layout>
+                    <checkbox ng-model="prePrecautions[4]" ng-true-value="1" ng-false-value="0">请做好个人清洁卫生</checkbox>
+                    <checkbox ng-model="prePrecautions[5]" ng-true-value="1" ng-false-value="0">请勿化妆涂指甲油</checkbox>
+                </div>
+                <div class="form-group" layout>
+                    <checkbox ng-model="prePrecautions[6]" ng-true-value="1" ng-false-value="0">非医生医嘱允许请勿饮食、如需术前用药请咨询您的主管医生</checkbox>
+                </div>
+                <div class="form-group" layout>
+                    <span>手术后可能出现的不适：</span>
+                    <checkbox ng-model="postDiscomfort[0]" ng-true-value="1" ng-false-value="0">伤口疼痛</checkbox>
+                    <checkbox ng-model="postDiscomfort[1]" ng-true-value="1" ng-false-value="0">尿管</checkbox>
+                    <checkbox ng-model="postDiscomfort[2]" ng-true-value="1" ng-false-value="0">呕吐</checkbox>
+                    <checkbox ng-model="postDiscomfort[3]" ng-true-value="1" ng-false-value="0">胃管</checkbox>
+                    <checkbox ng-model="postDiscomfort[4]" ng-true-value="1" ng-false-value="0">其他</checkbox>
+                </div>
+            </div>
+        </div>
+        <div layout class="tab-warp form-group">
+            <div layout layout-align="center center" class="tit-h text-center">
+                <span style="line-height: 15px;">完成内容</span>
+            </div>
+            <div flex style="padding: 5px;">
+                <div class="form-group" layout>
+                    <span>环境介绍：</span>
+                    <checkbox ng-model="vm.docVisitEvaluate.environIntrodu" ng-true-value="1" ng-false-value="0">未</checkbox>
+                    <checkbox ng-model="vm.docVisitEvaluate.environIntrodu" ng-true-value="2" ng-false-value="0">已</checkbox>
+                    <span>入室须知介绍：</span>
+                    <checkbox ng-model="vm.docVisitEvaluate.enterRoomIntrodu" ng-true-value="1" ng-false-value="0">未</checkbox>
+                    <checkbox ng-model="vm.docVisitEvaluate.enterRoomIntrodu" ng-true-value="2" ng-false-value="0">已</checkbox>
+                </div>
+                <div class="form-group" layout>
+                    <span>特殊手术体位指导：</span>
+                    <checkbox ng-model="vm.docVisitEvaluate.speOptBodyGuide" ng-true-value="1" ng-false-value="0">未</checkbox>
+                    <checkbox ng-model="vm.docVisitEvaluate.speOptBodyGuide" ng-true-value="2" ng-false-value="0">已</checkbox>
+                </div>
+            </div>
+        </div>
+        <div class="form-group" layout layout-wrap="wrap" layout-align="space-between end">
+            <span>患者目前存在的护理问题：</span>
+        </div>
+        <div class="form-group" layout layout-wrap="wrap" layout-align="space-between end">
+            <textarea class="no-triangle" cols="120" rows="4" ng-model="vm.docVisitEvaluate.nurseProblem" maxlength="220">{{vm.docVisitEvaluate.nurseProblem}}</textarea>
+        </div>
+        <div class="form-group" layout layout-wrap="wrap" layout-align="center end">
+            <h4>术后回访</h4>
+        </div>
+        <div class="form-group" layout layout-wrap="wrap" layout-align="space-between end">
+            <span>尊敬的患者及家属：</span>
+        </div>
+        <div class="form-group" layout layout-wrap="wrap" layout-align="space-between end">
+            <span style="text-indent: 30px;">您好！感谢您在手术期间给予我们护理工作的大力支持和配合，为了更好地改进手术室的护理工作质量，请您提出宝贵的意见和建议。谢谢！</span>
+        </div>
+        <div class="form-group" layout layout-wrap="wrap" layout-align="end end">
+            <span>回访护士：</span>
+            <input type="text" flex class="noborder3" readonly>
+        </div>
+        <table>
+            <tr>
+                <td>访视护士解释工作是否到位</td>
+                <td>
+                    <checkbox ng-model="vm.docVisitEvaluate" ng-disabled="true">是</checkbox>
+                    <checkbox ng-model="vm.docVisitEvaluate" ng-disabled="true">一般</checkbox>
+                    <checkbox ng-model="vm.docVisitEvaluate" ng-disabled="true">有待改进</checkbox>
+                </td>
+            </tr>
+            <tr>
+                <td>术前的特殊手术指导对您有用吗？</td>
+                <td>
+                    <checkbox ng-model="vm.docVisitEvaluate" ng-disabled="true">有</checkbox>
+                    <checkbox ng-model="vm.docVisitEvaluate" ng-disabled="true">没有</checkbox>
+                    <checkbox ng-model="vm.docVisitEvaluate" ng-disabled="true">有待改进</checkbox>
+                </td>
+            </tr>
+            <tr>
+                <td>访视护士的服务态度</td>
+                <td>
+                    <checkbox ng-model="vm.docVisitEvaluate" ng-disabled="true">好</checkbox>
+                    <checkbox ng-model="vm.docVisitEvaluate" ng-disabled="true">一般</checkbox>
+                    <checkbox ng-model="vm.docVisitEvaluate" ng-disabled="true">有待改进</checkbox>
+                </td>
+            </tr>
+            <tr>
+                <td>手术责任护士服务态度</td>
+                <td>
+                    <checkbox ng-model="vm.docVisitEvaluate" ng-disabled="true">好</checkbox>
+                    <checkbox ng-model="vm.docVisitEvaluate" ng-disabled="true">一般</checkbox>
+                    <checkbox ng-model="vm.docVisitEvaluate" ng-disabled="true">有待改进</checkbox>
+                </td>
+            </tr>
+            <tr>
+                <td>护士是否使用礼貌用语</td>
+                <td>
+                    <checkbox ng-model="vm.docVisitEvaluate" ng-disabled="true">有</checkbox>
+                    <checkbox ng-model="vm.docVisitEvaluate" ng-disabled="true">偶然</checkbox>
+                    <checkbox ng-model="vm.docVisitEvaluate" ng-disabled="true">有待改进</checkbox>
+                </td>
+            </tr>
+            <tr>
+                <td>护士操作前有否解释</td>
+                <td>
+                    <checkbox ng-model="vm.docVisitEvaluate" ng-disabled="true">有</checkbox>
+                    <checkbox ng-model="vm.docVisitEvaluate" ng-disabled="true">偶然</checkbox>
+                    <checkbox ng-model="vm.docVisitEvaluate" ng-disabled="true">有待改进</checkbox>
+                </td>
+            </tr>
+            <tr>
+                <td>护士静脉穿刺技术</td>
+                <td>
+                    <checkbox ng-model="vm.docVisitEvaluate" ng-disabled="true">好</checkbox>
+                    <checkbox ng-model="vm.docVisitEvaluate" ng-disabled="true">一般</checkbox>
+                    <checkbox ng-model="vm.docVisitEvaluate" ng-disabled="true">有待改进</checkbox>
+                </td>
+            </tr>
+            <tr>
+                <td>患者遮盖及保暖措施</td>
+                <td>
+                    <checkbox ng-model="vm.docVisitEvaluate" ng-disabled="true">舒适</checkbox>
+                    <checkbox ng-model="vm.docVisitEvaluate" ng-disabled="true">较好</checkbox>
+                    <checkbox ng-model="vm.docVisitEvaluate" ng-disabled="true">一般</checkbox>
+                </td>
+            </tr>
+            <tr>
+                <td>术中手术体位摆放是否舒适？</td>
+                <td>
+                    <checkbox ng-model="vm.docVisitEvaluate" ng-disabled="true">舒适</checkbox>
+                    <checkbox ng-model="vm.docVisitEvaluate" ng-disabled="true">较好</checkbox>
+                    <checkbox ng-model="vm.docVisitEvaluate" ng-disabled="true">一般</checkbox>
+                </td>
+            </tr>
+            <tr>
+                <td>通过访视对您有哪些帮助吗？</td>
+                <td>
+                    <checkbox ng-model="vm.docVisitEvaluate" ng-disabled="true">心理</checkbox>
+                    <checkbox ng-model="vm.docVisitEvaluate" ng-disabled="true">家属</checkbox>
+                    <checkbox ng-model="vm.docVisitEvaluate" ng-disabled="true">手术进程</checkbox>
+                </td>
+            </tr>
+        </table>
+        <div class="form-group" layout layout-wrap="wrap" layout-align="space-between end">
+            <span>您觉得还有哪些地方我们可以做得更好的吗？</span>
+        </div>
+    </div>
+</div>

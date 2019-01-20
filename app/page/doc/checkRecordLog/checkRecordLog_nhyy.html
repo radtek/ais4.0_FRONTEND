@@ -1,0 +1,130 @@
+<div id="print-region">
+    <div id="qxfllist" class="page-print surgeryNursing" ng-class="{true:'end-state'}[processState == 'END' && !saveActive || setting.readonly]">
+        <header layout="column" layout-align="center center" class="noTop" style="margin-top: -5px;">
+            <h3>南华医院手术物品清点记录单</h3>
+        </header>
+        <div class="form-group" layout layout-wrap="wrap" layout-align="space-between end">
+            <span>科别：<a flex>{{vm.regOpt.deptName}}</a></span>&nbsp;
+            <span>姓名：<a flex>{{vm.regOpt.name}}</a></span>&nbsp;
+            <span>性别：<a flex>{{vm.regOpt.sex}}</a></span>&nbsp;
+            <span>年龄：<a flex>{{vm.regOpt.age}}</a></span>&nbsp;
+            <span>住院病历号：<a flex>{{vm.regOpt.hid}}</a></span>&nbsp;
+            <span>手术间号：<a flex>{{vm.regOpt.operRoomName}}</a></span>
+        </div>
+        <div class="form-group" layout layout-align="space-between end">
+            <span>手术日期：<a flex>{{vm.regOpt.operaDate | date: 'yyyy 年 MM 月 dd 日'}}</a></span>
+            <span>输血：血型<select ng-options="item.codeValue as item.codeName for item in bloodList" ng-model="vm.optNurseItem.bloodType"></select></span>
+            <span>血液成分名称：血浆<input flex type="number" class="noborder4" ng-model="vm.optNurseItem.plasma">ml</span>
+        </div>
+        <div class="form-group" layout layout-wrap="wrap" layout-align="space-between end">
+            <span>红细胞</span>
+            <input flex type="number" class="noborder4" ng-model="vm.optNurseItem.rbc">U&nbsp;&nbsp;&nbsp;&nbsp;
+            <span>其他</span>
+            <input flex type="number" class="noborder4" ng-model="vm.optNurseItem.bloodOther">ml&nbsp;&nbsp;&nbsp;&nbsp;
+            <span>输液</span>
+            <input flex type="number" class="noborder4" ng-model="vm.optNurseItem.infusion">ml&nbsp;&nbsp;&nbsp;&nbsp;
+            <span>出血量</span>
+            <input flex type="number" class="noborder4" ng-model="vm.optNurseItem.bleeding">ml&nbsp;&nbsp;&nbsp;&nbsp;
+            <span>尿量</span>
+            <input flex type="number" class="noborder4" ng-model="vm.optNurseItem.urine">ml
+        </div>
+        <div class="form-group" layout layout-wrap="wrap" layout-align="space-between end">
+            <span layout flex>手术名称：<a flex>{{vm.optNurseItem.operatorName}}</a></span>
+        </div>
+        <div>
+            <div class="twotable_div" layout>
+                <div layout flex="50" style="height: 70px; line-height: 70px;" class="border-r">
+                    <div flex class="text-center">器械名称</div>
+                    <div style="width: 160px; line-height: normal;">
+                        <div layout-align="center center" class="border-l border-b text-center" style="height: 20px; line-height: 20px;">数量</div>
+                        <div layout style="height: 50px;">
+                            <div flex class="border-l text-center" style="line-height: 25px">术前清点</div>
+                            <div flex class="border-l text-center" style="line-height: 25px">术中加数</div>
+                            <div flex class="border-l text-center" style="line-height: 25px">关体腔前</div>
+                            <div flex class="border-l text-center" style="line-height: 25px">关体腔后</div>
+                        </div>
+                    </div>
+                    <div class="text-center border-l not-print" style="width: 40px;">操作</div>
+                </div>
+                <div layout flex="50" style="height: 70px; line-height: 70px;" class="border-r">
+                    <div flex class="text-center">器械名称</div>
+                    <div style="width: 160px; line-height: normal;">
+                        <div layout-align="center center" class="border-l border-b text-center" style="height: 20px; line-height: 20px;">数量</div>
+                        <div layout style="height: 50px;">
+                            <div flex class="border-l text-center" style="line-height: 25px">术前清点</div>
+                            <div flex class="border-l text-center" style="line-height: 25px">术中加数</div>
+                            <div flex class="border-l text-center" style="line-height: 25px">关体腔前</div>
+                            <div flex class="border-l text-center" style="line-height: 25px">关体腔后</div>
+                        </div>
+                    </div>
+                    <div class="text-center border-l not-print" style="width: 40px;">操作</div>
+                </div>
+            </div>
+            <div layout layout-wrap="wrap" style="border-left: 1px solid #000;" class="tableList">
+                <div layout flex="50" class="border-r border-b" style="min-height: 30px;" ng-repeat="item in vm.qxArr track by $index">
+                    <div flex class="qxArr_div">{{item.instruItemName}}</div>
+                    <div layout style="width: 160px;">
+                        <div layout flex class="border-l" layout-align='center center'>
+                            <input type="number" transform="number" min="0" ng-model="item.origamount" ng-value="item.origamount" ng-if="!item.slash && item.instruItemName" auto-focus="item.slash" class="not-print">
+                            <input ng-change="item.slash=item.slash!==''?'/':''" style="text-align: center" ng-model="item.slash" ng-if="item.slash" class="not-print">
+                            <span class="not-display" ng-if="item.origamount">{{item.origamount}}</span>
+                            <span class="not-display" ng-if="item.origamount == '' && item.instruItemName">/</span>
+                        </div>
+                        <div layout flex class="border-l" layout-align='center center'>
+                            <input class="text-center not-print" ng-model="item.inadd" ng-value="item.inadd" ng-if="!item.slash && item.instruItemName">
+                            <span class="not-display" ng-if="item.inadd">{{item.inadd}}</span>
+                            <span class="not-display" ng-if="item.inadd == '' && item.instruItemName">/</span>
+                        </div>
+                        <div layout flex class="border-l" layout-align='center center'>
+                            <input type="number" transform="number" min="0" class="not-print" ng-model="item.cloBeBody" ng-value="item.cloBeBody" ng-if="!item.slash && item.instruItemName">
+                            <span class="not-display" ng-if="item.cloBeBody >= 0">{{item.cloBeBody}}</span>
+                            <span class="not-display" ng-if="!(item.cloBeBody+'') && item.instruItemName">/</span>
+                        </div>
+                        <div layout flex class="border-l" layout-align='center center'>
+                            <input type="number" transform="number" min="0" class="not-print" ng-model="item.cloAfBody" ng-value="item.cloAfBody" ng-if="!item.slash && item.instruItemName">
+                            <span class="not-display" ng-if="item.cloAfBody >= 0">{{item.cloAfBody}}</span>
+                            <span class="not-display" ng-if="!(item.cloAfBody+'') && item.instruItemName">/</span>
+                        </div>
+                    </div>
+                    <div class="text-center border-l not-print" style="width: 40px;" layout layout-align='center center'>
+                        <span flex style="cursor:pointer;" class="glyphicon glyphicon-remove" ng-if="item.instruItemName" ng-click="vm.deleteInstrsuit(item)"></span>
+                    </div>
+                </div>
+                <div layout flex="50" class="border-r border-b" style="min-height: 30px;">
+                    <div flex class="qxArr_div" style="max-width: 100px;">器械护士签名</div>
+                    <div layout style="width: 200px;">
+                        <div layout flex class="border-l" layout-align='center center'></div>
+                    </div>
+                </div>
+                <div layout flex="50" class="border-r border-b" style="min-height: 30px;">
+                    <div flex class="qxArr_div" style="max-width: 100px;">巡回护士签名</div>
+                    <div layout style="width: 200px;">
+                        <div layout flex class="border-l" layout-align='center center'></div>
+                    </div>
+                </div>
+                <div layout flex="50" class="border-r border-b" style="min-height: 30px;">
+                    <div flex class="qxArr_div" style="max-width: 100px;">主刀医生签名</div>
+                    <div layout style="width: 200px;">
+                        <div layout flex class="border-l" layout-align='center center'></div>
+                    </div>
+                </div>
+                <div layout flex="50" class="border-r border-b" style="min-height: 30px;">
+                    <div flex class="qxArr_div" style="max-width: 100px;"></div>
+                    <div layout style="width: 200px;">
+                        <div layout flex class="border-l" layout-align='center center'></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="page-print surgeryNursing">
+        <div>
+            <span>灭菌包灭菌效果监测指示卡粘贴处</span>
+        </div>
+        <div class="paste"></div>
+        <div style="padding-top: 10px;">
+            <span>体内植入物条形码粘贴处</span>
+        </div>
+        <div class="paste"></div>
+    </div>
+</div>

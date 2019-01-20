@@ -1,0 +1,26 @@
+<!-- 加载中 -->
+<div class="print-progress">
+    <progressbar></progressbar>
+</div>
+<div id="doc-all">
+    <!-- 文书 -->
+    <pre-visit-log ng-if="doc_pre_visit"></pre-visit-log>
+    <access-log ng-if="doc_pre_post_visit"></access-log>
+    <shut-tran-nhyy-log ng-if="doc_opt_care_record"></shut-tran-nhyy-log>
+    <risk-asse-nhyy-log ng-if="doc_braden_evaluate"></risk-asse-nhyy-log>
+    <anes-program ng-if="doc_anaes_plan"></anes-program>
+    <info-cons ng-if="doc_accede"></info-cons>
+    <over-medi-log ng-if="doc_pat_out_range_agree"></over-medi-log>
+    <nurs-record-nhyy-log ng-if="doc_visit_evaluate"></nurs-record-nhyy-log>
+    <check-record-nhyy-log ng-if="doc_opt_nurse"></check-record-nhyy-log>
+    <safety-verif-nhyy-log ng-if="doc_safe_check"></safety-verif-nhyy-log>
+    
+    <anesthesia-summary ng-if="doc_anaes_summary"></anesthesia-summary>
+    <nhfe-anes-record-log ng-if="doc_anaes_record"></nhfe-anes-record-log>   <!-- 麻醉记录单 -->
+    <vein-accede ng-if="doc_vein_accede"></vein-accede>
+    <anaes-method-change ng-if="doc_anaes_method_change_record"></anaes-method-change>
+    <self-pay-instrument ng-if="doc_self_pay_instrument_accede"></self-pay-instrument>
+     <!-- <doc-anaes-pacu-rec ng-if="doc_anaes_pacu_rec"></doc-anaes-pacu-rec> -->
+    <doc-anaes-pacu-rec-nhfe ng-if="doc_anaes_pacu_rec"></doc-anaes-pacu-rec-nhfe>
+    <post-visit-log ng-if="doc_anaes_postop"></post-visit-log>
+</div>
